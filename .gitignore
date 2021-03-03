@@ -1,0 +1,17 @@
+Airport.Api/bin/
+Airport.Api/obj/
+Airport.Domain/obj/
+Airport.Domain/bin/
+Airport.Infrastructure/bin/
+Airport.Infrastructure/obj/
+Airport.Api.Tests/bin/
+Airport.Api.Tests/obj/
+Airport.Domain.Tests/obj/
+Airport.Domain.Tests/bin/
+Airport.Infrastructure.Tests/bin/
+Airport.Infrastructure.Tests/obj/
+.idea/
+*.info
+.vscode/
+.vs/
+Airport.sln.DotSettings.user
