@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airport.Api", "Airport.Api\Airport.Api.csproj", "{37DD4B49-C8CC-424E-B5CC-E673FD90E1F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airport.Domain", "Airport.Domain\Airport.Domain.csproj", "{68E65443-F4D0-4776-ACC4-3AE26D20075A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airport.Infrastructure", "Airport.Infrastructure\Airport.Infrastructure.csproj", "{F59A89FA-3BE2-4F08-8A43-1C1D61C31B7C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{37DD4B49-C8CC-424E-B5CC-E673FD90E1F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37DD4B49-C8CC-424E-B5CC-E673FD90E1F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37DD4B49-C8CC-424E-B5CC-E673FD90E1F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37DD4B49-C8CC-424E-B5CC-E673FD90E1F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68E65443-F4D0-4776-ACC4-3AE26D20075A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68E65443-F4D0-4776-ACC4-3AE26D20075A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68E65443-F4D0-4776-ACC4-3AE26D20075A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68E65443-F4D0-4776-ACC4-3AE26D20075A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F59A89FA-3BE2-4F08-8A43-1C1D61C31B7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F59A89FA-3BE2-4F08-8A43-1C1D61C31B7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F59A89FA-3BE2-4F08-8A43-1C1D61C31B7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F59A89FA-3BE2-4F08-8A43-1C1D61C31B7C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
