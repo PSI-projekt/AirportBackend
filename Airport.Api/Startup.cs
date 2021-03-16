@@ -57,7 +57,7 @@ namespace AirportBackend
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyPics");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "OpoleAirport");
                 c.RoutePrefix = "swagger";
             });
 
