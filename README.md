@@ -18,7 +18,7 @@ dotnet user-secrets init
 dotnet user-secrets set "AppSettings:EncryptionKey" "TAf30yv4g15177S6EW6idxfE5YxyJiCX8Wf2c4nf9Aw="
 dotnet user-secrets set "AppSettings:Token" "TAf30yv4g15177S6EW6idxfE5YxyJiCX8Wf2c4nf9Aw="
 dotnet user-secrets set "EmailConfiguration:Sender" ""
-dotnet user-secrets set "EmailConfiguration:SenderName" "noreply @ My Pics"
+dotnet user-secrets set "EmailConfiguration:SenderName" "noreply @ OpoleAirport"
 dotnet user-secrets set "EmailConfiguration:SmtpServer" "smtp.gmail.com"
 dotnet user-secrets set "EmailConfiguration:Port" 465
 dotnet user-secrets set "EmailConfiguration:Username" ""
