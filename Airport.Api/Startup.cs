@@ -30,6 +30,8 @@ namespace AirportBackend
             
             services.ConfigureSwagger();
             
+            services.AddAutoMapper(typeof(Startup).Assembly);
+            
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
