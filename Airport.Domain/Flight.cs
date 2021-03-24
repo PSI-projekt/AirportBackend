@@ -15,6 +15,7 @@ namespace Airport.Domain
         public int Destination { get; set; } // tutaj będzie id lotniska
         public string FlightNumber { get; set; }
         public string Gate { get; set; }
+        public string Status { get; set; }
         public int AirplaneId { get; set; }
 
         public virtual Airport Airport { get; set; }
