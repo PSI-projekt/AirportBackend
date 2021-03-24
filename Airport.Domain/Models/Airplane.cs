@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Airport.Domain
+namespace Airport.Domain.Models
 {
     class Airplane
     {
@@ -17,6 +17,6 @@ namespace Airport.Domain
         public int LocationId { get; set; }      
         public Airport Location { get; set; }
 
-        public virtual IEnumerable<Flight> Flights { get; set; } // a tutaj też to dać? :)
+        public virtual IEnumerable<Flight> Flights { get; set; }
     }
 }

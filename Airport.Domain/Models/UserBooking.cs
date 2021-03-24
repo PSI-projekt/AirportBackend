@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Airport.Domain
+namespace Airport.Domain.Models
 {
     class UserBooking
     {

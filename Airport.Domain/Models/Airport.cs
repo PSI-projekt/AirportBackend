@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Airport.Domain
+namespace Airport.Domain.Models
 {
     class Airport
     {
@@ -16,6 +16,7 @@ namespace Airport.Domain
         public string CodeIATA { get; set; }
 
         public virtual IEnumerable<Airplane> Airplanes { get; set; }
-        public virtual IEnumerable<Flight> Flights { get; set; }
+        public virtual IEnumerable<Flight> Origins { get; set; }
+        public virtual IEnumerable<Flight> Destinations { get; set; }
     }
 }
