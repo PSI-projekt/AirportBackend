@@ -8,7 +8,7 @@ namespace Airport.Domain
 {
     class Airplane
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Producent { get; set; }
         public string Model { get; set; }
         public string Identifier { get; set; }
