@@ -11,8 +11,9 @@ namespace Airport.Domain
         public int Id { get; set; }
         public int UserId { get; set; }
         public int BookingId { get; set; }
+        public User User { get; set; }
+        public Booking Booking { get; set; }
 
-        public virtual User User { get; set; }
-        public virtual Booking Booking { get; set; }
+        public virtual IEnumerable<Passenger> Passengers { get; set; }
     }
 }

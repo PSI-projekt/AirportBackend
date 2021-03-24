@@ -10,9 +10,10 @@ namespace Airport.Domain
     {
         public int Id { get; set; }
         public DateTime DateOfBooking { get; set; }
-        public string IsPaid { get; set; } // string czy bool?
+        public bool IsPaid { get; set; }
         public string FlightId { get; set; }
+        public Flight Flight { get; set; }
 
-        public virtual Flight Flight { get; set; }
+        public virtual IEnumerable<UserBooking> UserBookings { get; set; }
     }
 }

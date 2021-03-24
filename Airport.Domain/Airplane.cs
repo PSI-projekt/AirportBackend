@@ -9,15 +9,14 @@ namespace Airport.Domain
     class Airplane
     {
         public int Id { get; set; }
-        public string Producent { get; set; }
+        public string Maker { get; set; }
         public string Model { get; set; }
         public string Identifier { get; set; }
         public string Airline { get; set; }
-        public string IsInRepair { get; set; }
-        public int? Location { get; set; } // id lotniska na którym jest samolot,
-                                           // dałem ? bo jak jest w naprawie niekoniecznie musi mieć
-                                           // jakieś lotnisko
+        public bool IsInRepair { get; set; }
+        public int LocationId { get; set; }      
+        public Airport Location { get; set; }
 
-        public virtual Airport Airport { get; set; }
+        public virtual IEnumerable<Flight> Flights { get; set; } // a tutaj też to dać? :)
     }
 }

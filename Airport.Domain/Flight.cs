@@ -11,14 +11,16 @@ namespace Airport.Domain
         public int Id { get; set; }
         public DateTime DateOfDeparture { get; set; }
         public DateTime DateOfArrival { get; set; }
-        public int Origin { get; set; } // tutaj będzie id lotniska
-        public int Destination { get; set; } // tutaj będzie id lotniska
+        public int OriginId { get; set; }
+        public int DestinationId { get; set; }
         public string FlightNumber { get; set; }
         public string Gate { get; set; }
         public string Status { get; set; }
         public int AirplaneId { get; set; }
+        public Airplane Airplane { get; set; }
+        public Airport Origin { get; set; }
+        public Airport Destination { get; set; }
 
-        public virtual Airport Airport { get; set; }
-        public virtual Airplane Airplane { get; set; }
+        public virtual IEnumerable<Booking> Bookings { get; set; } // tutaj też to dać? :)
     }
 }

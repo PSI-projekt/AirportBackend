@@ -16,7 +16,6 @@ namespace Airport.Domain
         public string PostCode { get; set; }
         public string IDNumber { get; set; }
         public string UserBookingId { get; set; }
-
-        public virtual UserBooking UserBooking { get; set; }
+        public UserBooking UserBooking { get; set; }
     }
 }
