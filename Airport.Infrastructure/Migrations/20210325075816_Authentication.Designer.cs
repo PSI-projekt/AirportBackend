@@ -4,14 +4,16 @@ using Airport.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Airport.Infrastructure.Migrations
 {
     [DbContext(typeof(AirportDbContext))]
-    partial class AirportDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210325075816_Authentication")]
+    partial class Authentication
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -159,22 +161,16 @@ namespace Airport.Infrastructure.Migrations
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FirstName")
+                    b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IDNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PostCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Street")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StreetNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("UserBookingBookingId")
@@ -215,9 +211,6 @@ namespace Airport.Infrastructure.Migrations
                     b.Property<string>("IDNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsConfirmed")
-                        .HasColumnType("bit");
-
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
@@ -233,16 +226,7 @@ namespace Airport.Infrastructure.Migrations
                     b.Property<string>("Privileges")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RegistrationToken")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("RegistrationTokenGeneratedTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Street")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StreetNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")

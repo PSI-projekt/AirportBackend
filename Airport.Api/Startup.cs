@@ -1,14 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Airport.Infrastructure.Persistence;
+using Airport.Infrastructure.Persistence.DbSeed;
 using AirportBackend.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +24,8 @@ namespace AirportBackend
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<EmailConfiguration>(Configuration.GetSection("EmailConfiguration"));
+            
             services.AddDbContext<AirportDbContext>(options => options
                 .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));  
           
@@ -58,10 +56,10 @@ namespace AirportBackend
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<AirportDbContext>();
-                // var databaseSeed = new Seed(context);
+                var databaseSeed = new Seed(context);
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
-                // databaseSeed.SeedData();
+                databaseSeed.SeedData();
             }
             
             if (env.IsDevelopment())
