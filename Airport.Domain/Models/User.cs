@@ -21,6 +21,9 @@ namespace Airport.Domain.Models
         public string Street { get; set; }
         public string PostCode { get; set; }
         public string IDNumber { get; set; }
+        public bool IsConfirmed { get; set; }
+        public string RegistrationToken { get; set; }
+        public DateTime RegistrationTokenGeneratedTime { get; set; }
 
         public virtual IEnumerable<UserBooking> UserBookings { get; set; }
     }
