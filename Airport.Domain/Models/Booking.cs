@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Airport.Domain.Models
 {
-    class Booking
+    public class Booking
     {
         public int Id { get; set; }
         public DateTime DateOfBooking { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Airport.Domain.Models
 {
-    class Flight
+    public class Flight
     {
         public int Id { get; set; }
         public DateTime DateOfDeparture { get; set; }
@@ -18,8 +18,8 @@ namespace Airport.Domain.Models
         public string Status { get; set; }
         public int AirplaneId { get; set; }
         public Airplane Airplane { get; set; }
-        public Airport Origin { get; set; }
-        public Airport Destination { get; set; }
+        public AirportEntity Origin { get; set; }
+        public AirportEntity Destination { get; set; }
 
         public virtual IEnumerable<Booking> Bookings { get; set; }
     }
