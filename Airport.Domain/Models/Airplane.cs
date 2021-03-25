@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Airport.Domain.Models
 {
-    class Airplane
+    public class Airplane
     {
         public int Id { get; set; }
         public string Maker { get; set; }
@@ -15,7 +15,7 @@ namespace Airport.Domain.Models
         public string Airline { get; set; }
         public bool IsInRepair { get; set; }
         public int LocationId { get; set; }      
-        public Airport Location { get; set; }
+        public AirportEntity Location { get; set; }
 
         public virtual IEnumerable<Flight> Flights { get; set; }
     }

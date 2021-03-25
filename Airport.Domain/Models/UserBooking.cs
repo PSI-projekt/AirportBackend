@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Airport.Domain.Models
 {
-    class UserBooking
+    public class UserBooking
     {
-        public int Id { get; set; }
         public int UserId { get; set; }
         public int BookingId { get; set; }
         public User User { get; set; }

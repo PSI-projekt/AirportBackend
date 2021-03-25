@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Airport.Domain.Models
 {
-    class Passenger
+    public class Passenger
     {
         public int Id { get; set; }
         public string FullName { get; set; }

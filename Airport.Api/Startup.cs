@@ -55,6 +55,15 @@ namespace AirportBackend
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<AirportDbContext>();
+                // var databaseSeed = new Seed(context);
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
+                // databaseSeed.SeedData();
+            }
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
