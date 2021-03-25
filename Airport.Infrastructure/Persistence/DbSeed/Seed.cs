@@ -35,7 +35,7 @@ namespace Airport.Infrastructure.Persistence.DbSeed
             if (!_context.Users.Any())
             {
                 var userData = File
-                    .ReadAllText("../MyPics.Infrastructure/Persistence/DatabaseSeed/UserData.json");
+                    .ReadAllText("../Airport.Infrastructure/Persistence/DbSeed/UserData.json");
                 var users = JsonSerializer.Deserialize<List<User>>(userData);
                 foreach (var user in users)
                 {
