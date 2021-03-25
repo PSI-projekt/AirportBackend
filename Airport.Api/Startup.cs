@@ -1,5 +1,6 @@
 using System.Text;
 using Airport.Infrastructure.Persistence;
+using Airport.Infrastructure.Persistence.DbSeed;
 using AirportBackend.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -55,10 +56,10 @@ namespace AirportBackend
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<AirportDbContext>();
-                // var databaseSeed = new Seed(context);
+                var databaseSeed = new Seed(context);
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
-                // databaseSeed.SeedData();
+                databaseSeed.SeedData();
             }
             
             if (env.IsDevelopment())
