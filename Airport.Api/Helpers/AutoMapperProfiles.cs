@@ -1,3 +1,5 @@
+using Airport.Domain.DTOs;
+using Airport.Domain.Models;
 using AutoMapper;
 
 namespace AirportBackend.Helpers
@@ -6,6 +8,7 @@ namespace AirportBackend.Helpers
     {
         public AutoMapperProfiles()
         {
+            CreateMap<UserForRegisterDto, User>();
         }
     }
 }
