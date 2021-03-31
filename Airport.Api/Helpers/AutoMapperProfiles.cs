@@ -9,6 +9,7 @@ namespace AirportBackend.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<UserForRegisterDto, User>();
+            CreateMap<AirportForAddDto, AirportEntity>();
         }
     }
 }
