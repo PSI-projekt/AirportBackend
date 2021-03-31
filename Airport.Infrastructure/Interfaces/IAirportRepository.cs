@@ -3,8 +3,8 @@ using Airport.Domain.Models;
 
 namespace Airport.Infrastructure.Interfaces
 {
-    public interface IAirportEntityRepository
+    public interface IAirportRepository
     {
-        Task<AirportEntity> Add(AirportEntity airport);
+        Task<bool> Add(AirportEntity airport);
     }
 }
