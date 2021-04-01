@@ -11,7 +11,9 @@ namespace AirportBackend.Configuration
         public static void ConfigureDependencyInjection(this IServiceCollection services)
         {
             services.AddScoped<IAuthRepository, AuthRepository>();
-
+            services.AddScoped<IAirportRepository, AirportRepository>();
+            services.AddScoped<IAirplaneRepository, AirplaneRepository>();
+            
             services.AddScoped<ISmtpClient, SmtpClient>();
             services.AddScoped<IEmailService, EmailService>();
         }
