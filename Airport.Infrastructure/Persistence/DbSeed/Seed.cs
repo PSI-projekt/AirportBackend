@@ -19,6 +19,7 @@ namespace Airport.Infrastructure.Persistence.DbSeed
         public void SeedData()
         {
             SeedUsers();
+            SeedAirplanes();
         }
         
         private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
@@ -48,6 +49,22 @@ namespace Airport.Infrastructure.Persistence.DbSeed
                 }
                 _context.SaveChanges();
             }
+        }
+    }
+
+    private void SeedAirplanes()
+    {
+        if (!_context.Airplanes.Any())
+        {
+            var airplaneData = File
+                .ReadAllText("../Airport.Infrastructure/Persistence/DbSeed/AirplaneData.json");
+            var airplanes = JsonSerializer.Deserialize<List<Airplane>>(airportData);
+            foreach (var airplane in airplanes)
+            {
+                airplane.IsInRepair = false;
+                _context.Airplanes.Add(airplane);
+            }
+            _context.SaveChanges();
         }
     }
 }
