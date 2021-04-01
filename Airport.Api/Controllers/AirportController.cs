@@ -33,9 +33,7 @@ namespace AirportBackend.Controllers
 
             var result = await _airportEntityRepository.Add(airport);
 
-            if (result == false) return result ? Ok() : StatusCode((int)HttpStatusCode.InternalServerError);
-
-            return Ok();
+            return result ? Ok() : StatusCode((int)HttpStatusCode.InternalServerError);
         }
     }
 }
