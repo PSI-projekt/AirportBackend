@@ -19,6 +19,7 @@ namespace Airport.Infrastructure.Persistence.DbSeed
         public void SeedData()
         {
             SeedUsers();
+            SeedAirports();
         }
         
         private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
@@ -45,6 +46,21 @@ namespace Airport.Infrastructure.Persistence.DbSeed
                     user.PasswordSalt = passwordSalt;
                     user.IsConfirmed = true;
                     _context.Users.Add(user);
+                }
+                _context.SaveChanges();
+            }
+        }
+
+        private void SeedAirports()
+        {
+            if (!_context.Airports.Any())
+            {
+                var airportData = File
+                    .ReadAllText("../Airport.Infrastructure/Persistence/DbSeed/AirportData.json");
+                var airports = JsonSerializer.Deserialize<List<AirportEntity>>(airportData);
+                foreach (var airport in airports)
+                {
+                    _context.Airports.Add(airport);
                 }
                 _context.SaveChanges();
             }

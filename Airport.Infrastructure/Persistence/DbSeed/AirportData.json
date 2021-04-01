@@ -1,0 +1,44 @@
+[
+  {
+    "Name": "Opole Airport",
+    "Country": "Poland",
+    "City": "Opole",
+    "Street": "Pruszkowska 111",
+    "CodeIATA": "OPL"
+  },
+  {
+    "Name": "Katowice Pyrzowice Airport",
+    "Country": "Poland",
+    "City": "Katowice",
+    "Street": "Wolnoœci 90",
+    "CodeIATA": "KTW"
+  },
+  {
+    "Name": "Warsaw Chopin Airport",
+    "Country": "Poland",
+    "City": "Warsaw",
+    "Street": "¯wirki i Wigury",
+    "CodeIATA": "WAW"
+  },
+  {
+    "Name": "Berlin Brandenburg Airport Willy Brandt",
+    "Country": "Germany",
+    "City": "Berlin",
+    "Street": "Willy-Brandt-Platz",
+    "CodeIATA": "BER"
+  },
+  {
+    "Name": "Adolfo Suárez Madrid–Barajas Airport",
+    "Country": "Spain",
+    "City": "Madrit",
+    "Street": "Av de la Hispanidad",
+    "CodeIATA": "MAD"
+  },
+  {
+    "Name": "Leonardo da Vinci–Fiumicino Airport",
+    "Country": "Italy",
+    "City": "Rome",
+    "Street": "Via dell' Aeroporto di Fiumicino",
+    "CodeIATA": "FCO"
+  }
+]
