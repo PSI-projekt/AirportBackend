@@ -21,6 +21,7 @@ namespace Airport.Infrastructure.Persistence.DbSeed
             SeedUsers();
             SeedAirports();
             SeedAirplanes();
+            SeedFlights();
         }
         
         private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
