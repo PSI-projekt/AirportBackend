@@ -4,70 +4,70 @@
     "Model": "A380",
     "Identifier": "ABC12345",
     "Airline": "Lufthansa",
-    "LocationId": "1"
+    "LocationId": 1
   },
   {
     "Maker": "Airbus",
     "Model": "A321",
     "Identifier": "OLD45314",
     "Airline": "Lot",
-    "LocationId": "1"
+    "LocationId": 1
   },
   {
     "Maker": "Airbus",
     "Model": "A320",
     "Identifier": "ITR65634",
     "Airline": "Turkish Airlines",
-    "LocationId": "1"
+    "LocationId": 1
   },
   {
     "Maker": "Airbus",
     "Model": "A330",
     "Identifier": "LKA53521",
     "Airline": "Ryanair",
-    "LocationId": "1"
+    "LocationId": 1
   },
   {
     "Maker": "Airbus",
     "Model": "A340",
     "Identifier": "UCS63531",
     "Airline": "Wizzair",
-    "LocationId": "1"
+    "LocationId": 1
   },
   {
     "Maker": "Boeing",
     "Model": "737",
     "Identifier": "LLA13462",
     "Airline": "Condor",
-    "LocationId": "1"
+    "LocationId": 1
   },
   {
     "Maker": "Boeing",
     "Model": "747",
     "Identifier": "AFG65421",
     "Airline": "Delta",
-    "LocationId": "1"
+    "LocationId": 1
   },
   {
     "Maker": "Boeing",
     "Model": "767",
     "Identifier": "AAC12321",
     "Airline": "Emirates",
-    "LocationId": "1"
+    "LocationId": 1
   },
   {
     "Maker": "Boeing",
     "Model": "777",
     "Identifier": "BCA42313",
     "Airline": "KLM",
-    "LocationId": "1"
+    "LocationId": 1
   },
   {
     "Maker": "Boeing",
     "Model": "787",
     "Identifier": "ZZZ44411",
     "Airline": "AirAsia",
-    "LocationId": "1"
+    "LocationId": 1
   }
 ]
 

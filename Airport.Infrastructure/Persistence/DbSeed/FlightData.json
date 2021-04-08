@@ -1,73 +1,73 @@
 [
   {
-    "OriginId": "1",
-    "DestinationId": "2",
+    "OriginId": 1,
+    "DestinationId": 2,
     "Gate": "1",
     "Status": "On Time",
-    "AirplaneId": "1"
+    "AirplaneId": 1
   },
   {
-    "OriginId": "2",
-    "DestinationId": "3",
+    "OriginId": 2,
+    "DestinationId": 3,
     "Gate": "2",
     "Status": "On Time",
-    "AirplaneId": "2"
+    "AirplaneId": 2
   },
   {
-    "OriginId": "6",
-    "DestinationId": "3",
+    "OriginId": 6,
+    "DestinationId": 3,
     "Gate": "3",
     "Status": "On Time",
-    "AirplaneId": "3"
+    "AirplaneId": 3
   },
   {
-    "OriginId": "3",
-    "DestinationId": "5",
+    "OriginId": 3,
+    "DestinationId": 5,
     "Gate": "4",
     "Status": "On Time",
-    "AirplaneId": "4"
+    "AirplaneId": 4
   },
   {
-    "OriginId": "4",
-    "DestinationId": "1",
+    "OriginId": 4,
+    "DestinationId": 1,
     "Gate": "5",
     "Status": "On Time",
-    "AirplaneId": "5"
+    "AirplaneId": 5
   },
   {
-    "OriginId": "2",
-    "DestinationId": "4",
+    "OriginId": 2,
+    "DestinationId": 4,
     "Gate": "6",
     "Status": "On Time",
-    "AirplaneId": "6"
+    "AirplaneId": 6
   },
   {
-    "OriginId": "1",
-    "DestinationId": "3",
+    "OriginId": 1,
+    "DestinationId": 3,
     "Gate": "7",
     "Status": "On Time",
-    "AirplaneId": "7"
+    "AirplaneId": 7
   },
   {
-    "OriginId": "2",
-    "DestinationId": "5",
+    "OriginId": 2,
+    "DestinationId": 5,
     "Gate": "8",
     "Status": "On Time",
-    "AirplaneId": "8"
+    "AirplaneId": 8
   },
   {
-    "OriginId": "4",
-    "DestinationId": "3",
+    "OriginId": 4,
+    "DestinationId": 3,
     "Gate": "9",
     "Status": "On Time",
-    "AirplaneId": "9"
+    "AirplaneId": 9
   },
   {
-    "OriginId": "6",
-    "DestinationId": "5",
+    "OriginId": 6,
+    "DestinationId": 5,
     "Gate": "10",
     "Status": "On Time",
-    "AirplaneId": "10"
+    "AirplaneId": 10
   }
 ]
 
