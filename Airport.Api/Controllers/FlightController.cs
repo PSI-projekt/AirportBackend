@@ -14,7 +14,7 @@ namespace AirportBackend.Controllers
     [ApiController]
     public class FlightController : ControllerBase
     {
-        private readonly IAirplaneRepository _airplaneRepository;
+        private readonly IFlightRepository _flightRepository;
         private readonly IMapper _mapper;
 
         public FlightController(IFlightRepository flightRepository, IMapper mapper)
