@@ -74,11 +74,32 @@ namespace Airport.Infrastructure.Persistence.DbSeed
         {
             var airplaneData = File
                 .ReadAllText("../Airport.Infrastructure/Persistence/DbSeed/AirplaneData.json");
-            var airplanes = JsonSerializer.Deserialize<List<Airplane>>(airportData);
+            var airplanes = JsonSerializer.Deserialize<List<Airplane>>(airplanesData);
             foreach (var airplane in airplanes)
             {
                 airplane.IsInRepair = false;
                 _context.Airplanes.Add(airplane);
+            }
+            _context.SaveChanges();
+        }
+    }
+
+    private void SeedFlights()
+    {
+        if (!_context.Flights.Any())
+        {
+            var flightData = File
+                .ReadAllText("../Airport.Infrastructure/Persistence/DbSeed/FlightData.json");
+            var flights = JsonSerializer.Deserialize<List<Flight>>(flightsData);
+            Random rnd = new Random();
+            foreach (var flight in flights)
+            {
+
+                DateTime date = DateTime.Now + date.AddHours(rnd.Next(1, 10));
+                flight.DateOfDeparture = date;
+                flight.DateOfArrival = date + date.AddHours(rnd.Next(1, 4));
+                flight.FlightNumber = rnd.Next(1000, 9999);                
+                _context.Flights.Add(flight);
             }
             _context.SaveChanges();
         }
