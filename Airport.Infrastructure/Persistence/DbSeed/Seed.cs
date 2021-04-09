@@ -66,21 +66,21 @@ namespace Airport.Infrastructure.Persistence.DbSeed
                 _context.SaveChanges();
             }
         }
-    }
-
-    private void SeedAirplanes()
-    {
-        if (!_context.Airplanes.Any())
+        
+        private void SeedAirplanes()
         {
-            var airplaneData = File
-                .ReadAllText("../Airport.Infrastructure/Persistence/DbSeed/AirplaneData.json");
-            var airplanes = JsonSerializer.Deserialize<List<Airplane>>(airportData);
-            foreach (var airplane in airplanes)
+            if (!_context.Airplanes.Any())
             {
-                airplane.IsInRepair = false;
-                _context.Airplanes.Add(airplane);
+                var airplaneData = File
+                    .ReadAllText("../Airport.Infrastructure/Persistence/DbSeed/AirplaneData.json");
+                var airplanes = JsonSerializer.Deserialize<List<Airplane>>(airplaneData);
+                foreach (var airplane in airplanes)
+                {
+                    airplane.IsInRepair = false;
+                    _context.Airplanes.Add(airplane);
+                }
+                _context.SaveChanges();
             }
-            _context.SaveChanges();
         }
     }
 }
