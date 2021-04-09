@@ -24,7 +24,7 @@ namespace AirportBackend.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public async Task<IActionResult> Add(AirportForAddDto airportForAdd) 

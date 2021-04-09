@@ -18,8 +18,6 @@ namespace Airport.Infrastructure.Repositories
         }
         public async Task<bool> Add(Airplane airplane)
         {
-            if (airplane == null) return false;
-
             try
             {
                 await _context.Airplanes.AddAsync(airplane);
