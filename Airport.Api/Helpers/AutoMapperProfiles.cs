@@ -1,5 +1,6 @@
 using Airport.Domain.DTOs;
 using Airport.Domain.Models;
+using Airport.Infrastructure.Persistence;
 using AutoMapper;
 
 namespace AirportBackend.Helpers
@@ -12,6 +13,8 @@ namespace AirportBackend.Helpers
             CreateMap<AirportForAddDto, AirportEntity>();
             CreateMap<AirplaneForAddDto, Airplane>();
             CreateMap<FlightForAddDto, Flight>();
+            CreateMap<Flight, FlightForListDto>();
+            CreateMap<AirportEntity, AirportForFlightDto>();
         }
     }
 }
