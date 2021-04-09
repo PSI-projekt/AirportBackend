@@ -78,6 +78,12 @@ namespace AirportBackend
             });
 
             app.UseRouting();
+            
+            app.UseCors(x => x
+                .WithOrigins("http://localhost:4200")
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
 
             app.UseAuthentication();
             app.UseAuthorization();
