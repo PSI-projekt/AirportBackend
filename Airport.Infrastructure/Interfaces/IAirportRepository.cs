@@ -6,5 +6,6 @@ namespace Airport.Infrastructure.Interfaces
     public interface IAirportRepository
     {
         Task<bool> Add(AirportEntity airport);
+        Task<int> GetNumberOfAirports();
     }
 }

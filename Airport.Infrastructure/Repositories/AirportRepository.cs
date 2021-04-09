@@ -29,5 +29,18 @@ namespace Airport.Infrastructure.Repositories
                 return false;
             }
         }
+
+        public async Task<int> GetNumberOfAirports()
+        {
+            try
+            {
+                return await _context.Airports.CountAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return -1;
+            }
+        }
     }
 }
