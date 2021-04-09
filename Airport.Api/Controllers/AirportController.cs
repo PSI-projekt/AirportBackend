@@ -38,7 +38,7 @@ namespace AirportBackend.Controllers
 
         [HttpGet("count")]
         [AllowAnonymous]
-        [ProducesResponseType(typeof(int), (int) HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(AirportCountDto), (int) HttpStatusCode.OK)]
         [ProducesResponseType(typeof(string), (int) HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int) HttpStatusCode.InternalServerError)]
         public async Task<IActionResult> GetNumberOfAirports()
@@ -49,7 +49,7 @@ namespace AirportBackend.Controllers
             {
                 < 0 => StatusCode((int) HttpStatusCode.InternalServerError),
                 0 => BadRequest("Could not find any airports"),
-                _ => Ok(result)
+                _ => Ok(new AirportCountDto { NumberOfAirports = result })
             };
         }
     }
