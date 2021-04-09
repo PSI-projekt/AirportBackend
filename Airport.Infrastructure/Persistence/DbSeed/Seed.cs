@@ -96,10 +96,9 @@ namespace Airport.Infrastructure.Persistence.DbSeed
                 foreach (var flight in flights)
                 {
 
-                    DateTime date = DateTime.Now;
-                    date.AddHours(rnd.Next(1, 10));
-                    flight.DateOfDeparture = date;
-                    flight.DateOfArrival = date.AddHours(rnd.Next(1, 4));
+                    DateTime date = DateTime.UtcNow;
+                    flight.DateOfDeparture = date.AddHours(rnd.Next(1, 10));;
+                    flight.DateOfArrival = flight.DateOfDeparture.AddHours(rnd.Next(1, 4));
                     flight.FlightNumber = rnd.Next(1000, 9999).ToString();
                     _context.Flights.Add(flight);
                 }
