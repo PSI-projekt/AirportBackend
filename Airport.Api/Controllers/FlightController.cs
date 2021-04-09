@@ -3,6 +3,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Airport.Domain.DTOs;
 using Airport.Domain.Models;
+using Airport.Infrastructure.Helpers;
 using Airport.Infrastructure.Helpers.PaginationParameters;
 using Airport.Infrastructure.Interfaces;
 using AirportBackend.Extensions;
@@ -41,7 +42,7 @@ namespace AirportBackend.Controllers
         
         [HttpGet]
         [AllowAnonymous]
-        [ProducesResponseType((int) HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(PagedList<FlightForListDto>), (int) HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.BadRequest)]
         [ProducesResponseType((int) HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int) HttpStatusCode.InternalServerError)]
