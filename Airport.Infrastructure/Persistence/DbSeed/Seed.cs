@@ -68,8 +68,7 @@ namespace Airport.Infrastructure.Persistence.DbSeed
                 _context.SaveChanges();
             }
         }
-
-
+      
         private void SeedAirplanes()
         {
             if (!_context.Airplanes.Any())

@@ -18,8 +18,6 @@ namespace Airport.Infrastructure.Repositories
         }
         public async Task<bool> Add(AirportEntity airport)
         {
-            if (airport == null) return false;
-
             try
             {
                 await _context.Airports.AddAsync(airport);
