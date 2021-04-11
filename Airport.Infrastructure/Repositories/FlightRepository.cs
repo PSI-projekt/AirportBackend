@@ -59,5 +59,77 @@ namespace Airport.Infrastructure.Repositories
                 return null;
             }
         }
+
+        public async Task<bool> Edit(FlightForEditDto flightForEdit)
+        {
+            var flight = await GetById(flightForEdit.Id);
+            try
+            {
+                _mapper.Map(flightForEdit, flight);
+                return await Update(flight);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateStatus(FlightForStatusChangeDto flightForStatusChange)
+        {
+            var flight = await GetById(flightForStatusChange.Id);
+            try
+            {
+                flight.Status = flightForStatusChange.Status;
+                return await Update(flight);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+
+        public async Task<bool> Delete(int flightId)
+        {
+            var flight = await GetById(flightId);
+            try
+            {
+                _context.Remove(flight);
+                return await _context.SaveChangesAsync() > 0;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+
+        private async Task<Flight> GetById(int flightId)
+        {
+            try
+            {
+                return await _context.Flights.FirstOrDefaultAsync(x => x.Id == flightId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
+
+        private async Task<bool> Update(Flight flight)
+        {
+            try
+            {
+                _context.Update(flight);
+                return await _context.SaveChangesAsync() > 0;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
     }
 }
