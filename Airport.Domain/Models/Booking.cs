@@ -10,10 +10,10 @@ namespace Airport.Domain.Models
     {
         public int Id { get; set; }
         public DateTime DateOfBooking { get; set; }
-        public bool IsPaid { get; set; }
         public string FlightId { get; set; }
         public Flight Flight { get; set; }
 
         public virtual IEnumerable<UserBooking> UserBookings { get; set; }
+        public virtual IEnumerable<Payment> Payments { get; set; }
     }
 }
