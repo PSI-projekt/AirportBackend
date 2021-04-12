@@ -10,5 +10,8 @@ namespace Airport.Infrastructure.Interfaces
     {
         Task<bool> Add(Flight flight);
         Task<PagedList<FlightForListDto>> GetFlights(FlightParameters parameters);
+        Task<bool> Edit(FlightForEditDto flightForEdit);
+        Task<bool> UpdateStatus(FlightForStatusChangeDto flightForStatusChange);
+        Task<bool> Delete(int flightId);
     }
 }
