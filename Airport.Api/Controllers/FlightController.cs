@@ -19,11 +19,16 @@ namespace AirportBackend.Controllers
     public class FlightController : ControllerBase
     {
         private readonly IFlightRepository _flightRepository;
+        private readonly IBookingRepository _bookingRepository;
+        private readonly IAirplaneRepository _airplaneRepository;
         private readonly IMapper _mapper;
 
-        public FlightController(IFlightRepository flightRepository, IMapper mapper)
+        public FlightController(IFlightRepository flightRepository, IBookingRepository bookingRepository, 
+            IAirplaneRepository airplaneRepository, IMapper mapper)
         {
             _flightRepository = flightRepository;
+            _bookingRepository = bookingRepository;
+            _airplaneRepository = airplaneRepository;
             _mapper = mapper;
         }
 
@@ -55,6 +60,29 @@ namespace AirportBackend.Controllers
             Response.AddPaginationHeader(flights.CurrentPage, flights.PageSize, flights.TotalCount, flights.TotalPages);
 
             return Ok(flights);
+        }
+        
+        [HttpGet("seats/{flightId}")]
+        [ProducesResponseType(typeof(SeatCountForFlightDto), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public async Task<IActionResult> GetAvailableSeats(int flightId)
+        {
+            var passengerCount = await _bookingRepository.GetNumberOfPassengersForFlight(flightId);
+
+            if (passengerCount < 0) return StatusCode((int) HttpStatusCode.InternalServerError);
+
+            var seatCount = await _airplaneRepository.GetNumberOfSeatsForFlight(flightId);
+            
+            if (seatCount < 0) return StatusCode((int) HttpStatusCode.InternalServerError);
+
+            var dto = new SeatCountForFlightDto
+            {
+                FlightId = flightId,
+                SeatCount = seatCount - passengerCount
+            };
+
+            return Ok(dto);
         }
     }
 }
