@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 using Airport.Domain.Models;
 using Airport.Infrastructure.Interfaces;
@@ -27,6 +27,23 @@ namespace Airport.Infrastructure.Repositories
             {
                 Console.WriteLine(e);
                 return false;
+            }
+        }
+
+        public async Task<int> GetNumberOfSeatsForFlight(int flightId)
+        {
+            try
+            {
+                return await _context.Flights
+                    .Where(x => x.Id == flightId)
+                    .AsNoTracking()
+                    .Select(x => x.Airplane.NumberOfSeats)
+                    .FirstOrDefaultAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return -1;
             }
         }
     }

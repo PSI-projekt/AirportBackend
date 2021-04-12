@@ -6,5 +6,6 @@ namespace Airport.Infrastructure.Interfaces
     public interface IAirplaneRepository
     {
         Task<bool> Add(Airplane airplane);
+        Task<int> GetNumberOfSeatsForFlight(int flightId);
     }
 }
