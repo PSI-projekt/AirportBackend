@@ -13,6 +13,7 @@ namespace AirportBackend.Helpers
             CreateMap<AirportForAddDto, AirportEntity>();
             CreateMap<AirplaneForAddDto, Airplane>();
             CreateMap<FlightForAddDto, Flight>();
+            CreateMap<FlightForEditDto, Flight>();
             CreateMap<Flight, FlightForListDto>();
             CreateMap<AirportEntity, AirportForFlightDto>();
         }

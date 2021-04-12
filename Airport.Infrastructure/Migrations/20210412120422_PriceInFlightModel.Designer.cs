@@ -4,14 +4,16 @@ using Airport.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Airport.Infrastructure.Migrations
 {
     [DbContext(typeof(AirportDbContext))]
-    partial class AirportDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210412120422_PriceInFlightModel")]
+    partial class PriceInFlightModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,9 +45,6 @@ namespace Airport.Infrastructure.Migrations
 
                     b.Property<string>("Model")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("NumberOfSeats")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -91,12 +90,15 @@ namespace Airport.Infrastructure.Migrations
                     b.Property<DateTime>("DateOfBooking")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("FlightId")
+                    b.Property<string>("FlightId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("FlightId1")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FlightId");
+                    b.HasIndex("FlightId1");
 
                     b.ToTable("Bookings");
                 });
@@ -177,12 +179,18 @@ namespace Airport.Infrastructure.Migrations
                     b.Property<string>("StreetNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserBookingId")
+                    b.Property<int?>("UserBookingBookingId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserBookingId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UserBookingUserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserBookingId");
+                    b.HasIndex("UserBookingUserId", "UserBookingBookingId");
 
                     b.ToTable("Passengers");
                 });
@@ -275,25 +283,15 @@ namespace Airport.Infrastructure.Migrations
 
             modelBuilder.Entity("Airport.Domain.Models.UserBooking", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.Property<int>("BookingId")
                         .HasColumnType("int");
 
-                    b.Property<int>("NumberOfPassengers")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
+                    b.HasKey("UserId", "BookingId");
 
                     b.HasIndex("BookingId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("UserBookings");
                 });
@@ -313,9 +311,7 @@ namespace Airport.Infrastructure.Migrations
                 {
                     b.HasOne("Airport.Domain.Models.Flight", "Flight")
                         .WithMany("Bookings")
-                        .HasForeignKey("FlightId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FlightId1");
 
                     b.Navigation("Flight");
                 });
@@ -351,9 +347,7 @@ namespace Airport.Infrastructure.Migrations
                 {
                     b.HasOne("Airport.Domain.Models.UserBooking", "UserBooking")
                         .WithMany("Passengers")
-                        .HasForeignKey("UserBookingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserBookingUserId", "UserBookingBookingId");
 
                     b.Navigation("UserBooking");
                 });

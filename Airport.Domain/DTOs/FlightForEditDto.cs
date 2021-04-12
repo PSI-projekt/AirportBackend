@@ -1,24 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace Airport.Domain.Models
+namespace Airport.Domain.DTOs
 {
-    public class Flight
+    public class FlightForEditDto
     {
+        [Required]
         public int Id { get; set; }
+        [Required]
         public DateTime DateOfDeparture { get; set; }
+        [Required]
         public DateTime DateOfArrival { get; set; }
+        [Required]
         public int OriginId { get; set; }
+        [Required]
         public int DestinationId { get; set; }
+        [Required]
         public string FlightNumber { get; set; }
+        [Required]
         public string Gate { get; set; }
+        [Required]
         public string Status { get; set; }
-        public double PricePerPassenger { get; set; }
+        [Required]
         public int AirplaneId { get; set; }
-        public Airplane Airplane { get; set; }
-        public AirportEntity Origin { get; set; }
-        public AirportEntity Destination { get; set; }
-
-        public virtual IEnumerable<Booking> Bookings { get; set; }
     }
 }

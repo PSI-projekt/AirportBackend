@@ -38,6 +38,8 @@ namespace AirportBackend.Controllers
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public async Task<IActionResult> Add(FlightForAddDto flightForAdd)
         {
+            // TODO: Check if user has privileges
+
             var flight = _mapper.Map<Flight>(flightForAdd);
 
             var result = await _flightRepository.Add(flight);
@@ -82,7 +84,46 @@ namespace AirportBackend.Controllers
                 SeatCount = seatCount - passengerCount
             };
 
-            return Ok(dto);
+            return Ok(dto);        
+        }
+        
+        [HttpPatch]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public async Task<IActionResult> Update(FlightForEditDto flightForEdit)
+        {
+            // TODO: Check if user has privileges
+
+            var result = await _flightRepository.Edit(flightForEdit);
+
+            return result ? Ok() : StatusCode((int)HttpStatusCode.InternalServerError);
+        }
+        
+        [HttpPatch("status")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public async Task<IActionResult> UpdateStatus(FlightForStatusChangeDto flightForStatusChange)
+        {
+            // TODO: Check if user has privileges
+
+            var result = await _flightRepository.UpdateStatus(flightForStatusChange);
+
+            return result ? Ok() : StatusCode((int)HttpStatusCode.InternalServerError);
+        }
+        
+        [HttpDelete("{flightId}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public async Task<IActionResult> Delete(int flightId)
+        {
+            // TODO: Check if user has privileges
+            
+            var result = await _flightRepository.Delete(flightId);
+
+            return result ? Ok() : StatusCode((int)HttpStatusCode.InternalServerError);
         }
     }
 }
