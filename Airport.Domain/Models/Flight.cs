@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Airport.Domain.Models
 {
@@ -16,6 +13,7 @@ namespace Airport.Domain.Models
         public string FlightNumber { get; set; }
         public string Gate { get; set; }
         public string Status { get; set; }
+        public double PricePerPassenger { get; set; }
         public int AirplaneId { get; set; }
         public Airplane Airplane { get; set; }
         public AirportEntity Origin { get; set; }
