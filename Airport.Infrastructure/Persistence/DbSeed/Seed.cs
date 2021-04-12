@@ -23,6 +23,8 @@ namespace Airport.Infrastructure.Persistence.DbSeed
             SeedAirports();
             SeedAirplanes();
             SeedFlights();
+            SeedBookings();
+            SeedPassengers();
         }
 
         private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
@@ -104,6 +106,45 @@ namespace Airport.Infrastructure.Persistence.DbSeed
                 }
                 _context.SaveChanges();
             }
+        }
+        
+        
+        private void SeedBookings()
+        {
+            if (!_context.Bookings.Any())
+            {
+                var bookingData = File
+                    .ReadAllText("../Airport.Infrastructure/Persistence/DbSeed/BookingData.json");
+                var bookings = JsonSerializer.Deserialize<List<Booking>>(bookingData);
+                var id = 1;
+                foreach (var booking in bookings)
+                {
+                    _context.Bookings.Add(booking);
+                    _context.UserBookings.Add(new UserBooking
+                    {
+                        BookingId = id,
+                        UserId = id,
+                        NumberOfPassengers = 11
+                    });
+                    id++;
+                }
+                _context.SaveChanges();
+            }
+        }
+        
+        private void SeedPassengers()
+        {
+            for (int i = 1; i <= 4; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    _context.Passengers.Add(new Passenger
+                    {
+                        UserBookingId = i
+                    });
+                }
+            }
+            _context.SaveChanges();
         }
     }
 }
