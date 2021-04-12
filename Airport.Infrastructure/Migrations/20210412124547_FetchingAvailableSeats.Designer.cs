@@ -4,14 +4,16 @@ using Airport.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Airport.Infrastructure.Migrations
 {
     [DbContext(typeof(AirportDbContext))]
-    partial class AirportDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210412124547_FetchingAvailableSeats")]
+    partial class FetchingAvailableSeats
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -128,9 +130,6 @@ namespace Airport.Infrastructure.Migrations
 
                     b.Property<int>("OriginId")
                         .HasColumnType("int");
-
-                    b.Property<double>("PricePerPassenger")
-                        .HasColumnType("float");
 
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Airport.Domain.Models
 {
@@ -18,7 +13,7 @@ namespace Airport.Domain.Models
         public string StreetNumber { get; set; }
         public string PostCode { get; set; }
         [Encrypted] public string IDNumber { get; set; }
-        public string UserBookingId { get; set; }
+        public int UserBookingId { get; set; }
         public UserBooking UserBooking { get; set; }
     }
 }
