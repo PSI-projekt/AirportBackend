@@ -40,9 +40,6 @@ namespace Airport.Infrastructure.Persistence
                 .HasOne(x => x.Destination)
                 .WithMany(x => x.Destinations)
                 .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<UserBooking>()
-                .HasKey(x => new {x.UserId, x.BookingId});
         }
     }
 }
