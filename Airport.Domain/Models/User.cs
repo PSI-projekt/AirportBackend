@@ -11,7 +11,7 @@ namespace Airport.Domain.Models
         [Encrypted] public string Email { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
-        public string Privileges { get; set; }
+        public int Privileges { get; set; }
         [Encrypted] public string FirstName { get; set; }
         [Encrypted] public string LastName { get; set; }
         [Encrypted] public string Country { get; set; }
