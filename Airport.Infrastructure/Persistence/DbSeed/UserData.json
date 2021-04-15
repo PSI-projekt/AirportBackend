@@ -2,21 +2,21 @@
   {
     "Username": "Tina",
     "Email": "tinakemp@nurali.com",
-    "Privilages": 0
+    "Privileges": 0
   },
   {
     "Username": "Cash",
     "Email": "cashford@nurali.com",
-    "Privilages": 0
+    "Privileges": 0
   },
   {
     "Username": "Lewis",
     "Email": "lewismcfarland@nurali.com",
-    "Privilages": 1
+    "Privileges": 1
   },
   {
     "Username": "Roman",
     "Email": "romanrosales@nurali.com",
-    "Privilages": 2
+    "Privileges": 2
   }
 ]
