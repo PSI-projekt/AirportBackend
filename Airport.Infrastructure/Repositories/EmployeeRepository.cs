@@ -36,7 +36,7 @@ namespace Airport.Infrastructure.Repositories
                 return await _context.Users
                     .Where(x => x.Id == userId)
                     .AsNoTracking()
-                    .Select(x => x.Privilages)                    
+                    .Select(x => x.Privileges)                    
                     .FirstOrDefaultAsync(x => x.Username == username);
             }
             catch (Exception e)
