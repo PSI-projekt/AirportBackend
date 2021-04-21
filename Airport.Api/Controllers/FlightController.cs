@@ -1,15 +1,19 @@
 ﻿using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Airport.Domain.DTOs;
 using Airport.Domain.Models;
 using Airport.Infrastructure.Helpers;
 using Airport.Infrastructure.Helpers.PaginationParameters;
 using Airport.Infrastructure.Interfaces;
+using Airport.Infrastructure.Repositories;
 using AirportBackend.Extensions;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using AirportBackend.Enums;
+using System.Collections.Generic;
 
 namespace AirportBackend.Controllers
 {
@@ -21,14 +25,16 @@ namespace AirportBackend.Controllers
         private readonly IFlightRepository _flightRepository;
         private readonly IBookingRepository _bookingRepository;
         private readonly IAirplaneRepository _airplaneRepository;
+        private readonly IAuthRepository _authRepository;
         private readonly IMapper _mapper;
 
         public FlightController(IFlightRepository flightRepository, IBookingRepository bookingRepository, 
-            IAirplaneRepository airplaneRepository, IMapper mapper)
+            IAirplaneRepository airplaneRepository, IAuthRepository authRepository, IMapper mapper)
         {
             _flightRepository = flightRepository;
             _bookingRepository = bookingRepository;
             _airplaneRepository = airplaneRepository;
+            _authRepository = authRepository;
             _mapper = mapper;
         }
 
@@ -38,7 +44,15 @@ namespace AirportBackend.Controllers
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public async Task<IActionResult> Add(FlightForAddDto flightForAdd)
         {
-            // TODO: Check if user has privileges
+            if (!int.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty, out var userId))
+                return Unauthorized();
+
+            var privilages = new List<int>() {(int)UserPrivileges.Administrator, (int)UserPrivileges.Employee};
+
+            int.TryParse(User.FindFirst(ClaimTypes.Role)?.Value, out var privilagesId);
+
+            if (!privilages.Contains(privilagesId))
+                return StatusCode((int)HttpStatusCode.Unauthorized);
 
             var flight = _mapper.Map<Flight>(flightForAdd);
 
@@ -93,7 +107,15 @@ namespace AirportBackend.Controllers
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public async Task<IActionResult> Update(FlightForEditDto flightForEdit)
         {
-            // TODO: Check if user has privileges
+            if (!int.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty, out var userId))
+                return Unauthorized();
+
+            var privilages = new List<int>() { (int)UserPrivileges.Administrator, (int)UserPrivileges.Employee };
+
+            int.TryParse(User.FindFirst(ClaimTypes.Role)?.Value, out var privilagesId);
+
+            if (!privilages.Contains(privilagesId))
+                return StatusCode((int)HttpStatusCode.Unauthorized);
 
             var result = await _flightRepository.Edit(flightForEdit);
 
@@ -106,7 +128,15 @@ namespace AirportBackend.Controllers
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public async Task<IActionResult> UpdateStatus(FlightForStatusChangeDto flightForStatusChange)
         {
-            // TODO: Check if user has privileges
+            if (!int.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty, out var userId))
+                return Unauthorized();
+
+            var privilages = new List<int>() { (int)UserPrivileges.Administrator, (int)UserPrivileges.Employee };
+
+            int.TryParse(User.FindFirst(ClaimTypes.Role)?.Value, out var privilagesId);
+
+            if (!privilages.Contains(privilagesId))
+                return StatusCode((int)HttpStatusCode.Unauthorized);
 
             var result = await _flightRepository.UpdateStatus(flightForStatusChange);
 
@@ -119,8 +149,16 @@ namespace AirportBackend.Controllers
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public async Task<IActionResult> Delete(int flightId)
         {
-            // TODO: Check if user has privileges
-            
+            if (!int.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty, out var userId))
+                return Unauthorized();
+
+            var privilages = new List<int>() { (int)UserPrivileges.Administrator, (int)UserPrivileges.Employee };
+
+            int.TryParse(User.FindFirst(ClaimTypes.Role)?.Value, out var privilagesId);
+
+            if (!privilages.Contains(privilagesId))
+                return StatusCode((int)HttpStatusCode.Unauthorized);
+
             var result = await _flightRepository.Delete(flightId);
 
             return result ? Ok() : StatusCode((int)HttpStatusCode.InternalServerError);
