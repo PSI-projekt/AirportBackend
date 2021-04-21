@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Airport.Domain.Models;
 using Airport.Infrastructure.Interfaces;
 using Airport.Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
-
 
 namespace Airport.Infrastructure.Repositories
 {
@@ -16,34 +13,19 @@ namespace Airport.Infrastructure.Repositories
         {
             _context = context;
         }
-        public async Task<bool> Add(Employee employee)
+        public async Task<User> Add(User employee, string password)
         {
             try
             {
                 await _context.Users.AddAsync(employee);
-                return await _context.SaveChangesAsync() > 0;
+                await _context.SaveChangesAsync();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return false;
+                return null;
             }
-        }
-        public async Task<int> GetUserRole(int userId)
-        {
-            try
-            {
-                return await _context.Users
-                    .Where(x => x.Id == userId)
-                    .AsNoTracking()
-                    .Select(x => x.Privileges)                    
-                    .FirstOrDefaultAsync(x => x.Username == username);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return -1;
-            }
-        }               
+            return employee;
+        }             
     }
 }
