@@ -10,5 +10,6 @@ namespace Airport.Infrastructure.Interfaces
         Task<bool> UserExists(string username);
         Task<bool> EmailExists(string email);
         Task<bool> ConfirmEmail(string token, string username);
+        Task<bool> UserHasPrivileges(int userId, int privileges);
     }
 }

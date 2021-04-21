@@ -134,7 +134,7 @@ namespace Airport.Infrastructure.Repositories
 
             return true;
         }
-        
+
         private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using var hmac = new HMACSHA512();
@@ -148,11 +148,33 @@ namespace Airport.Infrastructure.Repositories
             var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
             return !computedHash.Where((t, i) => t != passwordHash[i]).Any();
         }
-        
+
         private static void GenerateRegistrationToken(ref User user)
         {
             user.RegistrationToken = TokenGenerator.GenerateToken();
             user.RegistrationTokenGeneratedTime = DateTime.UtcNow;
+        }
+
+        public async Task<bool> UserHasPrivileges(int userId, int privileges)
+        {
+            try
+            {
+                var _privileges = await _context.Users
+                    .Where(x => x.Id == userId)
+                    .AsNoTracking()
+                    .Select(x => x.Privileges)
+                    .FirstOrDefaultAsync();
+
+                if (_privileges == privileges)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
         }
     }
 }
