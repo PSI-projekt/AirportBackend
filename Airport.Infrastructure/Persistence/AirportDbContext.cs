@@ -24,7 +24,7 @@ namespace Airport.Infrastructure.Persistence
         public DbSet<Flight> Flights { get; set; }
         public DbSet<Passenger> Passengers { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<UserBooking> UserBookings { get; set; }
+        public DbSet<PassengerBooking> PassengerBookings { get; set; }
         public DbSet<Payment> Payments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
