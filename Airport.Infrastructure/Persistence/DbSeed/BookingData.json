@@ -1,14 +1,18 @@
 [
   {
-    "FlightId": 1
+    "FlightId": 1,
+    "UserId": 1
   },
   {
-    "FlightId": 1
+    "FlightId": 1,
+    "UserId": 2
   },
   {
-    "FlightId": 2
+    "FlightId": 2,
+    "UserId": 3
   },
   {
-    "FlightId": 3
+    "FlightId": 3,
+    "UserId": 4
   }
 ]
