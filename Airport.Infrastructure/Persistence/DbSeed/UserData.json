@@ -2,12 +2,28 @@
   {
     "Username": "Tina",
     "Email": "tinakemp@nurali.com",
-    "Privileges": 0
+    "Privileges": 0,
+    "FirstName": "Tina",
+    "LastName": "Nowak",
+    "Country": "Poland",
+    "City": "Opole",
+    "Street": "Prószkowska",
+    "StreetNumber": "20",
+    "PostCode": "23-403",
+    "IDNumber": "123456789"
   },
   {
     "Username": "Cash",
     "Email": "cashford@nurali.com",
-    "Privileges": 0
+    "Privileges": 0,
+    "FirstName": "Cash",
+    "LastName": "Kowalski",
+    "Country": "Germany",
+    "City": "Berlin",
+    "Street": "Spandauer Str.",
+    "StreetNumber": "54",
+    "PostCode": "10178",
+    "IDNumber": "C01X00T47"
   },
   {
     "Username": "Lewis",
