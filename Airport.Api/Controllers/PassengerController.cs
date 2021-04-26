@@ -1,4 +1,8 @@
+using System.Collections.Generic;
+using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Airport.Domain.DTOs;
 using Airport.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,12 +21,18 @@ namespace AirportBackend.Controllers
             _passengerRepository = passengerRepository;
         }
 
-        [HttpGet("{userId}")]
-        public async Task<IActionResult> GetPassengersForUser(int userId)
+        [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<PassengerForListDto>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public async Task<IActionResult> GetPassengersForUser()
         {
+            if (!int.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty, out var userId))
+                return Unauthorized();
+            
             var result = await _passengerRepository.GetPassengersForUser(userId);
 
-            return Ok(result);
+            return result != null ? Ok(result) : StatusCode((int)HttpStatusCode.InternalServerError);
         }
     }
 }
