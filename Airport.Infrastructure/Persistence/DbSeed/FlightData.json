@@ -4,280 +4,320 @@
     "DestinationId": 2,
     "Gate": "1",
     "Status": "On Time",
-    "AirplaneId": 1
+    "AirplaneId": 1,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 2,
     "DestinationId": 3,
     "Gate": "2",
     "Status": "On Time",
-    "AirplaneId": 2
+    "AirplaneId": 2,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 6,
     "DestinationId": 3,
     "Gate": "3",
     "Status": "On Time",
-    "AirplaneId": 3
+    "AirplaneId": 3,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 3,
     "DestinationId": 5,
     "Gate": "4",
     "Status": "On Time",
-    "AirplaneId": 4
+    "AirplaneId": 4,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 4,
     "DestinationId": 1,
     "Gate": "5",
     "Status": "On Time",
-    "AirplaneId": 5
+    "AirplaneId": 5,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 2,
     "DestinationId": 4,
     "Gate": "6",
     "Status": "On Time",
-    "AirplaneId": 6
+    "AirplaneId": 6,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 1,
     "DestinationId": 3,
     "Gate": "7",
     "Status": "On Time",
-    "AirplaneId": 7
+    "AirplaneId": 7,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 2,
     "DestinationId": 5,
     "Gate": "8",
     "Status": "On Time",
-    "AirplaneId": 8
+    "AirplaneId": 8,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 4,
     "DestinationId": 3,
     "Gate": "9",
     "Status": "On Time",
-    "AirplaneId": 9
+    "AirplaneId": 9,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 6,
     "DestinationId": 5,
     "Gate": "10",
     "Status": "On Time",
-    "AirplaneId": 10
+    "AirplaneId": 10,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 1,
     "DestinationId": 2,
     "Gate": "1",
     "Status": "On Time",
-    "AirplaneId": 11
+    "AirplaneId": 11,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 2,
     "DestinationId": 3,
     "Gate": "2",
     "Status": "On Time",
-    "AirplaneId": 12
+    "AirplaneId": 12,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 6,
     "DestinationId": 3,
     "Gate": "3",
     "Status": "On Time",
-    "AirplaneId": 13
+    "AirplaneId": 13,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 3,
     "DestinationId": 5,
     "Gate": "4",
     "Status": "On Time",
-    "AirplaneId": 14
+    "AirplaneId": 14,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 4,
     "DestinationId": 1,
     "Gate": "5",
     "Status": "On Time",
-    "AirplaneId": 15
+    "AirplaneId": 15,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 2,
     "DestinationId": 4,
     "Gate": "6",
     "Status": "On Time",
-    "AirplaneId": 16
+    "AirplaneId": 16,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 1,
     "DestinationId": 3,
     "Gate": "7",
     "Status": "On Time",
-    "AirplaneId": 17
+    "AirplaneId": 17,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 2,
     "DestinationId": 5,
     "Gate": "8",
     "Status": "On Time",
-    "AirplaneId": 18
+    "AirplaneId": 18,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 4,
     "DestinationId": 3,
     "Gate": "9",
     "Status": "On Time",
-    "AirplaneId": 19
+    "AirplaneId": 19,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 6,
     "DestinationId": 5,
     "Gate": "10",
     "Status": "On Time",
-    "AirplaneId": 20
+    "AirplaneId": 20,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 1,
     "DestinationId": 2,
     "Gate": "1",
     "Status": "On Time",
-    "AirplaneId": 21
+    "AirplaneId": 21,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 2,
     "DestinationId": 3,
     "Gate": "2",
     "Status": "On Time",
-    "AirplaneId": 22
+    "AirplaneId": 22,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 6,
     "DestinationId": 3,
     "Gate": "3",
     "Status": "On Time",
-    "AirplaneId": 23
+    "AirplaneId": 23,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 3,
     "DestinationId": 5,
     "Gate": "4",
     "Status": "On Time",
-    "AirplaneId": 24
+    "AirplaneId": 24,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 4,
     "DestinationId": 1,
     "Gate": "5",
     "Status": "On Time",
-    "AirplaneId": 25
+    "AirplaneId": 25,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 2,
     "DestinationId": 4,
     "Gate": "6",
     "Status": "On Time",
-    "AirplaneId": 26
+    "AirplaneId": 26,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 1,
     "DestinationId": 3,
     "Gate": "7",
     "Status": "On Time",
-    "AirplaneId": 27
+    "AirplaneId": 27,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 2,
     "DestinationId": 5,
     "Gate": "8",
     "Status": "On Time",
-    "AirplaneId": 28
+    "AirplaneId": 28,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 4,
     "DestinationId": 3,
     "Gate": "9",
     "Status": "On Time",
-    "AirplaneId": 29
+    "AirplaneId": 29,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 6,
     "DestinationId": 5,
     "Gate": "10",
     "Status": "On Time",
-    "AirplaneId": 30
+    "AirplaneId": 30,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 1,
     "DestinationId": 2,
     "Gate": "1",
     "Status": "On Time",
-    "AirplaneId": 31
+    "AirplaneId": 31,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 2,
     "DestinationId": 3,
     "Gate": "2",
     "Status": "On Time",
-    "AirplaneId": 32
+    "AirplaneId": 32,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 6,
     "DestinationId": 3,
     "Gate": "3",
     "Status": "On Time",
-    "AirplaneId": 33
+    "AirplaneId": 33,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 3,
     "DestinationId": 5,
     "Gate": "4",
     "Status": "On Time",
-    "AirplaneId": 34
+    "AirplaneId": 34,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 4,
     "DestinationId": 1,
     "Gate": "5",
     "Status": "On Time",
-    "AirplaneId": 35
+    "AirplaneId": 35,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 2,
     "DestinationId": 4,
     "Gate": "6",
     "Status": "On Time",
-    "AirplaneId": 36
+    "AirplaneId": 36,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 1,
     "DestinationId": 3,
     "Gate": "7",
     "Status": "On Time",
-    "AirplaneId": 37
+    "AirplaneId": 37,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 2,
     "DestinationId": 5,
     "Gate": "8",
     "Status": "On Time",
-    "AirplaneId": 38
+    "AirplaneId": 38,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 4,
     "DestinationId": 3,
     "Gate": "9",
     "Status": "On Time",
-    "AirplaneId": 39
+    "AirplaneId": 39,
+    "PricePerPassenger": 500
   },
   {
     "OriginId": 6,
     "DestinationId": 5,
     "Gate": "10",
     "Status": "On Time",
-    "AirplaneId": 40
+    "AirplaneId": 40,
+    "PricePerPassenger": 500
   }
 ]
 

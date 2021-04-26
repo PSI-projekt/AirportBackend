@@ -105,7 +105,7 @@ namespace Airport.Infrastructure.Repositories
             }
         }
 
-        private async Task<Flight> GetById(int flightId)
+        public async Task<Flight> GetById(int flightId)
         {
             try
             {
