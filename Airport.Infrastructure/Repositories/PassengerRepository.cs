@@ -65,11 +65,20 @@ namespace Airport.Infrastructure.Repositories
 
         public async Task<List<PassengerForListDto>> GetPassengersForUser(int userId)
         {
-            throw new NotImplementedException();
-            // return await _context.Passengers
-            //     .Where(x => x.PassengerBooking.Booking. == userId)
-            //     .ProjectTo<PassengerForListDto>(_mapper.ConfigurationProvider)
-            //     .ToListAsync();
+            try
+            {
+                return await _context.PassengerBookings
+                    .Where(x => x.Booking.UserId == userId)
+                    .Select(x => x.Passenger)
+                    .ProjectTo<PassengerForListDto>(_mapper.ConfigurationProvider)
+                    .AsNoTracking()
+                    .ToListAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
         }
 
         public async Task<bool> AddPassengerBookings(IEnumerable<PassengerBooking> passengerBookings)

@@ -18,6 +18,7 @@ namespace AirportBackend.Helpers
             CreateMap<EmployeeForAddDto, User>();
             CreateMap<PassengerForBookingDto, Passenger>();
             CreateMap<Payment, PaymentDto>();
+            CreateMap<Passenger, PassengerForListDto>();
         }
     }
 }
