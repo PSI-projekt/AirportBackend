@@ -133,14 +133,12 @@ namespace Airport.Infrastructure.Persistence.DbSeed
                     IDNumber = (10 % i).ToString()
                 });
                 _context.SaveChanges();
-                for (int j = 0; j < 5; j++)
+            
+                _context.PassengerBookings.Add(new PassengerBooking
                 {
-                    _context.PassengerBookings.Add(new PassengerBooking
-                    {
-                        BookingId = i,
-                        PassengerId = i,
-                    });
-                }
+                    BookingId = i,
+                    PassengerId = i,
+                });
             }
             _context.SaveChanges();
         }
