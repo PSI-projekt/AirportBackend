@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -55,27 +56,57 @@ namespace AirportBackend.Controllers
             if (bookingForAdd.Passengers.Count() > availableSeats)
                 return BadRequest("There are no more seats available for this flight.");
 
-            var result = await _bookingRepository.Add(userId, bookingForAdd.FlightId, bookingForAdd.Passengers.Count());
-
-            if (result == null) return BadRequest("There was an error while processing Your request.");
-
-            var passengers = _mapper.Map<IEnumerable<Passenger>>(bookingForAdd.Passengers).ToList();
-
-            foreach (var passenger in passengers)
+            var bookingToAdd = new Booking
             {
-                passenger.UserBookingId = result.Id;
+                UserId = userId,
+                FlightId = bookingForAdd.FlightId,
+                NumberOfPassengers = bookingForAdd.Passengers.Count(),
+                DateOfBooking = DateTime.UtcNow,
+                IsAccepted = false
+            };
+
+            var bookingResult = await _bookingRepository.Add(bookingToAdd);
+
+            if (bookingResult == null) return BadRequest("There was an error while processing Your request.");
+            
+            var newPassengers = new List<Passenger>();
+            var passengersToUpdate = new List<Passenger>();
+
+            foreach (var dto in bookingForAdd.Passengers)
+            {
+                var passengerResult = await _passengerRepository.GetPassenger(dto);
+
+                if (passengerResult == null)
+                {
+                    newPassengers.Add(_mapper.Map<Passenger>(dto));
+                    continue;
+                }
+
+                var passengerToUpdate = _mapper.Map<Passenger>(dto);
+                passengerToUpdate.Id = passengerResult.Id;
+                passengersToUpdate.Add(passengerToUpdate);
             }
 
-            var resultPassengers = await _passengerRepository.AddPassengers(passengers);
+            var added = await _passengerRepository.AddPassengers(newPassengers);
+            var updated = await _passengerRepository.UpdatePassengers(passengersToUpdate);
             
-            if (!resultPassengers) return BadRequest("There was an error while processing Your request.");
+            if (added == null || updated == null) return BadRequest("There was an error while processing Your request.");
+
+            var passengerBookings = added.Select(passenger => new PassengerBooking
+                {BookingId = bookingResult.Id, PassengerId = passenger.Id,}).ToList();
+            passengerBookings.AddRange(updated.Select(passenger => new PassengerBooking
+                {BookingId = bookingResult.Id, PassengerId = passenger.Id}));
+
+            var passengerBookingResult = await _passengerRepository.AddPassengerBookings(passengerBookings);
+            
+            if (!passengerBookingResult) return BadRequest("There was an error while processing Your request.");
 
             var flight = await _flightRepository.GetById(bookingForAdd.FlightId);
             
             if (flight == null) return BadRequest("There was an error while processing Your request.");
 
             var paymentResult = await _paymentRepository
-                .Add(flight.PricePerPassenger, bookingForAdd.Passengers.Count(), result.Booking.Id);
+                .Add(flight.PricePerPassenger, bookingForAdd.Passengers.Count(), bookingResult.Id);
             
             if (paymentResult == null) return BadRequest("There was an error while processing Your request.");
 
