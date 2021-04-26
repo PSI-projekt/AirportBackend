@@ -4,7 +4,6 @@ namespace Airport.Domain.Models
 {
     public class PassengerBooking
     {
-        public int Id { get; set; }
         public int PassengerId { get; set; }
         public int BookingId { get; set; }
         public Passenger Passenger { get; set; }
