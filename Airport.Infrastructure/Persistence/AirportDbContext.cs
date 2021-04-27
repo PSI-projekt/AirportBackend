@@ -24,7 +24,7 @@ namespace Airport.Infrastructure.Persistence
         public DbSet<Flight> Flights { get; set; }
         public DbSet<Passenger> Passengers { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<UserBooking> UserBookings { get; set; }
+        public DbSet<PassengerBooking> PassengerBookings { get; set; }
         public DbSet<Payment> Payments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -40,6 +40,9 @@ namespace Airport.Infrastructure.Persistence
                 .HasOne(x => x.Destination)
                 .WithMany(x => x.Destinations)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<PassengerBooking>()
+                .HasKey(x => new {x.BookingId, x.PassengerId});
         }
     }
 }

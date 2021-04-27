@@ -21,8 +21,8 @@ namespace Airport.Infrastructure.Repositories
         {
             try
             {
-                return await _context.UserBookings
-                    .Where(x => x.Booking.FlightId == flightId)
+                return await _context.Bookings
+                    .Where(x => x.FlightId == flightId)
                     .AsNoTracking()
                     .Select(x => x.NumberOfPassengers)
                     .SumAsync();
@@ -34,25 +34,12 @@ namespace Airport.Infrastructure.Repositories
             }
         }
 
-        public async Task<UserBooking> Add(int userId, int flightId, int passengerCount)
+        public async Task<Booking> Add(Booking booking)
         {
             try
             {
-                var resultBooking = await _context.Bookings.AddAsync(new Booking
-                {
-                    FlightId = flightId,
-                    DateOfBooking = DateTime.UtcNow
-                });
-                
-                await _context.SaveChangesAsync();
-                
-                var result = await _context.UserBookings.AddAsync(new UserBooking
-                {
-                    BookingId = resultBooking.Entity.Id,
-                    UserId = userId,
-                    NumberOfPassengers = passengerCount
-                });
-                
+                var result = await _context.Bookings.AddAsync(booking);
+
                 await _context.SaveChangesAsync();
 
                 return result.Entity;

@@ -4,14 +4,16 @@ using Airport.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Airport.Infrastructure.Migrations
 {
     [DbContext(typeof(AirportDbContext))]
-    partial class AirportDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210426130859_RefactorRemoveUserBooking")]
+    partial class RefactorRemoveUserBooking
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -195,13 +197,20 @@ namespace Airport.Infrastructure.Migrations
 
             modelBuilder.Entity("Airport.Domain.Models.PassengerBooking", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<int>("BookingId")
                         .HasColumnType("int");
 
                     b.Property<int>("PassengerId")
                         .HasColumnType("int");
 
-                    b.HasKey("BookingId", "PassengerId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookingId");
 
                     b.HasIndex("PassengerId");
 

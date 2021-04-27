@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Airport.Domain.Models
 {
@@ -12,8 +13,8 @@ namespace Airport.Domain.Models
         [Encrypted] public string Street { get; set; }
         public string StreetNumber { get; set; }
         public string PostCode { get; set; }
-        [Encrypted] public string IDNumber { get; set; }
-        public int UserBookingId { get; set; }
-        public UserBooking UserBooking { get; set; }
+        public string IDNumber { get; set; }
+        
+        public IEnumerable<PassengerBooking> PassengerBookings { get; set; }
     }
 }

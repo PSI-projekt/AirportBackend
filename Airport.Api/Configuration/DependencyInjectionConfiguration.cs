@@ -18,7 +18,8 @@ namespace AirportBackend.Configuration
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IPaymentRepository, PaymentRepository>();
             services.AddScoped<IPassengerRepository, PassengerRepository>();
-          
+            services.AddScoped<IUserRepository, UserRepository>();
+
             services.AddScoped<ISmtpClient, SmtpClient>();
             services.AddScoped<IEmailService, EmailService>();
         }

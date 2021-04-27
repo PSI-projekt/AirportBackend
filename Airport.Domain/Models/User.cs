@@ -24,6 +24,6 @@ namespace Airport.Domain.Models
         [Encrypted] public string RegistrationToken { get; set; }
         public DateTime RegistrationTokenGeneratedTime { get; set; }
 
-        public virtual IEnumerable<UserBooking> UserBookings { get; set; }
+        public virtual IEnumerable<Booking> Bookings { get; set; }
     }
 }

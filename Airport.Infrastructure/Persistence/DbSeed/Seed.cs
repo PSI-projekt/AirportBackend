@@ -116,17 +116,9 @@ namespace Airport.Infrastructure.Persistence.DbSeed
                 var bookingData = File
                     .ReadAllText("../Airport.Infrastructure/Persistence/DbSeed/BookingData.json");
                 var bookings = JsonSerializer.Deserialize<List<Booking>>(bookingData);
-                var id = 1;
                 foreach (var booking in bookings)
                 {
                     _context.Bookings.Add(booking);
-                    _context.UserBookings.Add(new UserBooking
-                    {
-                        BookingId = id,
-                        UserId = id,
-                        NumberOfPassengers = 11
-                    });
-                    id++;
                 }
                 _context.SaveChanges();
             }
@@ -136,13 +128,24 @@ namespace Airport.Infrastructure.Persistence.DbSeed
         {
             for (int i = 1; i <= 4; i++)
             {
-                for (int j = 0; j < 10; j++)
+                _context.Passengers.Add(new Passenger
                 {
-                    _context.Passengers.Add(new Passenger
-                    {
-                        UserBookingId = i
-                    });
-                }
+                    IDNumber = (10 % i).ToString(),
+                    FirstName = "Jan",
+                    LastName = "Kowalski",
+                    City = "Opole",
+                    Street = "Ozimska",
+                    StreetNumber = "2",
+                    Country = "Poland",
+                    PostCode = "23-432"
+                });
+                _context.SaveChanges();
+            
+                _context.PassengerBookings.Add(new PassengerBooking
+                {
+                    BookingId = i,
+                    PassengerId = i,
+                });
             }
             _context.SaveChanges();
         }

@@ -6,6 +6,6 @@ namespace Airport.Infrastructure.Interfaces
     public interface IBookingRepository
     {
         Task<int> GetNumberOfPassengersForFlight(int flightId);
-        Task<UserBooking> Add(int userId, int flightId, int passengerCount);
+        Task<Booking> Add(Booking booking);
     }
 }
