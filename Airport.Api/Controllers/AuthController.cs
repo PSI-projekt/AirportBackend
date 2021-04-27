@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using AirportBackend.Enums;
 
 namespace AirportBackend.Controllers
 {
@@ -33,7 +34,7 @@ namespace AirportBackend.Controllers
             _configuration = configuration;
             _mapper = mapper;
             _emailService = emailService;
-        }
+    }
         
         [HttpPost("register")]
         [ProducesResponseType((int) HttpStatusCode.OK)]
@@ -77,7 +78,8 @@ namespace AirportBackend.Controllers
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.Username)
+                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Role, user.Privileges.ToString())
             };
 
             SymmetricSecurityKey key;
@@ -134,5 +136,6 @@ namespace AirportBackend.Controllers
             
             return await _emailService.SendEmail(message);
         }
+
     }
 }
