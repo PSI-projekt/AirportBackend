@@ -70,6 +70,7 @@ namespace Airport.Infrastructure.Repositories
                 return await _context.PassengerBookings
                     .Where(x => x.Booking.UserId == userId)
                     .Select(x => x.Passenger)
+                    .Distinct()
                     .ProjectTo<PassengerForListDto>(_mapper.ConfigurationProvider)
                     .AsNoTracking()
                     .ToListAsync();
