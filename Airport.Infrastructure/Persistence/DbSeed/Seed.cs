@@ -130,7 +130,14 @@ namespace Airport.Infrastructure.Persistence.DbSeed
             {
                 _context.Passengers.Add(new Passenger
                 {
-                    IDNumber = (10 % i).ToString()
+                    IDNumber = (10 % i).ToString(),
+                    FirstName = "Jan",
+                    LastName = "Kowalski",
+                    City = "Opole",
+                    Street = "Ozimska",
+                    StreetNumber = "2",
+                    Country = "Poland",
+                    PostCode = "23-432"
                 });
                 _context.SaveChanges();
             
