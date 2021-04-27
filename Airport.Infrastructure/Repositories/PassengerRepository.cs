@@ -87,6 +87,7 @@ namespace Airport.Infrastructure.Repositories
             try
             {
                 _context.PassengerBookings.AddRange(passengerBookings);
+
                 return await _context.SaveChangesAsync() > 0;
             }
             catch (Exception e)

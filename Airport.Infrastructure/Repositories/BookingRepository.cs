@@ -39,6 +39,7 @@ namespace Airport.Infrastructure.Repositories
             try
             {
                 var result = await _context.Bookings.AddAsync(booking);
+
                 await _context.SaveChangesAsync();
 
                 return result.Entity;

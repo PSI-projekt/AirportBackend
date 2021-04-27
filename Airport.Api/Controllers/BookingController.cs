@@ -55,7 +55,7 @@ namespace AirportBackend.Controllers
 
             if (bookingForAdd.Passengers.Count() > availableSeats)
                 return BadRequest("There are no more seats available for this flight.");
-
+                
             var bookingToAdd = new Booking
             {
                 UserId = userId,
