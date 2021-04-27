@@ -13,19 +13,18 @@ namespace Airport.Infrastructure.Repositories
         {
             _context = context;
         }
-        public async Task<User> Add(User employee, string password)
+        public async Task<bool> Add(User employee, string password)
         {
             try
             {
                 await _context.Users.AddAsync(employee);
-                await _context.SaveChangesAsync();
+                return await _context.SaveChangesAsync() > 0;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return null;
+                return false;
             }
-            return employee;
         }             
     }
 }

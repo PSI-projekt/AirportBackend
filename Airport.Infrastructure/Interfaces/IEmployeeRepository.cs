@@ -5,6 +5,6 @@ namespace Airport.Infrastructure.Interfaces
 {
     public interface IEmployeeRepository
     {
-        Task<User> Add(User employee, string password);
+        Task<bool> Add(User employee, string password);
     }
 }
