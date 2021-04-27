@@ -54,7 +54,7 @@ namespace AirportBackend.Controllers
 
             var addedEmployee = await _authRepository.Register(employee, employeeForAdd.Password);
 
-            return addedEmployee != null ? Ok(): StatusCode((int)HttpStatusCode.OK);
+            return addedEmployee != null ? Ok(): StatusCode((int)HttpStatusCode.InternalServerError);
         }
     }
 }
