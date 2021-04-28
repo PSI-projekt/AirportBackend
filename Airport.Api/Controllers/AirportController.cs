@@ -65,5 +65,27 @@ namespace AirportBackend.Controllers
                 _ => Ok(new AirportCountDto { NumberOfAirports = result })
             };
         }
+
+        [HttpGet]
+        [Authorize]
+        [ProducesResponseType(typeof(List<AirportForListDto>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public async Task<IActionResult> GetAirports()
+        {
+            if (!int.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty, out _))
+                return Unauthorized();
+
+            var privilages = new List<int>() { (int)UserPrivileges.Administrator, (int)UserPrivileges.Employee };
+
+            int.TryParse(User.FindFirst(ClaimTypes.Role)?.Value, out var privilagesId);
+
+            if (!privilages.Contains(privilagesId))
+                return StatusCode((int)HttpStatusCode.Unauthorized);
+
+            var result = await _airportRepository.GetAirports();
+
+            return result != null ? Ok(result) : StatusCode((int)HttpStatusCode.InternalServerError);
+        }
     }
 }
