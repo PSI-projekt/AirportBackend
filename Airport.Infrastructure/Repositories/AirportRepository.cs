@@ -53,7 +53,6 @@ namespace Airport.Infrastructure.Repositories
             try
             {
                 return await _context.Airports
-                    //.Select(x => x.) //zostawic ToListAsync();
                     .OrderBy(x => x.Name)
                     .ProjectTo<AirportForListDto>(_mapper.ConfigurationProvider)
                     .AsNoTracking()
