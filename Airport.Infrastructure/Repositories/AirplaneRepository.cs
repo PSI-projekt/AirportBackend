@@ -5,16 +5,21 @@ using Airport.Domain.Models;
 using Airport.Infrastructure.Interfaces;
 using Airport.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-
+using System.Collections.Generic;
+using Airport.Domain.DTOs;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 namespace Airport.Infrastructure.Repositories
 {
     public class AirplaneRepository : IAirplaneRepository
     {
         private readonly AirportDbContext _context;
-        public AirplaneRepository(AirportDbContext context)
+        private readonly IMapper _mapper;
+        public AirplaneRepository(AirportDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
         public async Task<bool> Add(Airplane airplane)
         {
@@ -44,6 +49,23 @@ namespace Airport.Infrastructure.Repositories
             {
                 Console.WriteLine(e);
                 return -1;
+            }
+        }
+
+        public async Task<List<AirplaneForListDto>> GetAirplanes()
+        {
+            try
+            {
+                return await _context.Airplanes
+                    .OrderBy(x => x.Identifier)
+                    .ProjectTo<AirplaneForListDto>(_mapper.ConfigurationProvider)
+                    .AsNoTracking()
+                    .ToListAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
             }
         }
     }

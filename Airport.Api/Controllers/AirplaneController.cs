@@ -48,5 +48,27 @@ namespace AirportBackend.Controllers
 
             return result ? Ok() : StatusCode((int)HttpStatusCode.InternalServerError);                        
         }
+
+        [HttpGet]
+        [Authorize]
+        [ProducesResponseType(typeof(List<AirplaneForListDto>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public async Task<IActionResult> GetAirplanes()
+        {
+            if (!int.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty, out _))
+                return Unauthorized();
+
+            var privilages = new List<int>() { (int)UserPrivileges.Administrator, (int)UserPrivileges.Employee };
+
+            int.TryParse(User.FindFirst(ClaimTypes.Role)?.Value, out var privilagesId);
+
+            if (!privilages.Contains(privilagesId))
+                return StatusCode((int)HttpStatusCode.Unauthorized);
+
+            var result = await _airplaneRepository.GetAirplanes();
+
+            return result != null ? Ok(result) : StatusCode((int)HttpStatusCode.InternalServerError);
+        }
     }
 }
