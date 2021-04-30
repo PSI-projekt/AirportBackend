@@ -20,6 +20,8 @@ namespace Airport.Domain.DTOs
         [Required]
         public string Status { get; set; }
         [Required]
+        public double PricePerPassenger { get; set; }
+        [Required]
         public int AirplaneId { get; set; }
     }
 }

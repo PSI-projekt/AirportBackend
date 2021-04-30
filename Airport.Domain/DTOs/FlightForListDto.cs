@@ -10,6 +10,7 @@ namespace Airport.Domain.DTOs
         public DateTime DateOfArrival { get; set; }
         public string FlightNumber { get; set; }
         public string Status { get; set; }
+        public double PricePerPassenger { get; set; }
         public AirportForFlightDto Origin { get; set; }
         public AirportForFlightDto Destination { get; set; }
     }
