@@ -8,6 +8,7 @@ using Airport.Domain.DTOs;
 using Airport.Domain.Models;
 using Airport.Infrastructure.Interfaces;
 using AirportBackend.Configuration;
+using AirportBackend.Enums;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -62,7 +63,7 @@ namespace AirportBackend.Controllers
                 FlightId = bookingForAdd.FlightId,
                 NumberOfPassengers = bookingForAdd.Passengers.Count(),
                 DateOfBooking = DateTime.UtcNow,
-                IsAccepted = false
+                IsCancelled = false
             };
 
             var bookingResult = await _bookingRepository.Add(bookingToAdd);
@@ -116,6 +117,27 @@ namespace AirportBackend.Controllers
             paymentDto.Swift = Constants.Swift;
 
             return Ok(paymentDto);
+        }
+        
+        [HttpPatch("cancel")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public async Task<IActionResult> Cancel(int bookingId)
+        {
+            if (!int.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty, out var _))
+                return Unauthorized();
+
+            var privilages = new List<int>() { (int)UserPrivileges.Administrator, (int)UserPrivileges.Employee };
+
+            int.TryParse(User.FindFirst(ClaimTypes.Role)?.Value, out var privilagesId);
+
+            if (!privilages.Contains(privilagesId))
+                return StatusCode((int)HttpStatusCode.Unauthorized);
+
+            var result = await _bookingRepository.Cancel(bookingId);
+
+            return result ? Ok() : StatusCode((int)HttpStatusCode.InternalServerError);
         }
     }
 }

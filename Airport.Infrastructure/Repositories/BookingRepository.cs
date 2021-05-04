@@ -50,5 +50,44 @@ namespace Airport.Infrastructure.Repositories
                 return null;
             }
         }
+        public async Task<bool> Cancel(int bookingId) 
+        {
+            var booking = await GetById(bookingId);
+            try
+            {
+                booking.IsCancelled = true;
+                return await Update(booking);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+        public async Task<Booking> GetById(int bookingId)
+        {
+            try
+            {
+                return await _context.Bookings.FirstOrDefaultAsync(x => x.Id == bookingId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
+        private async Task<bool> Update(Booking booking)
+        {
+            try
+            {
+                _context.Update(booking);
+                return await _context.SaveChangesAsync() > 0;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
     }
 }
