@@ -22,7 +22,7 @@ namespace Airport.Infrastructure.Repositories
             try
             {
                 return await _context.Bookings
-                    .Where(x => x.FlightId == flightId)
+                    .Where(x => x.FlightId == flightId && x.IsCancelled != true)
                     .AsNoTracking()
                     .Select(x => x.NumberOfPassengers)
                     .SumAsync();
