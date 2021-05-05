@@ -139,5 +139,33 @@ namespace AirportBackend.Controllers
 
             return result ? Ok() : StatusCode((int)HttpStatusCode.InternalServerError);
         }
+        
+        [HttpPatch("edit")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public async Task<IActionResult> Edit(BookingForEditDto bookingForEdit)
+        {
+            if (!int.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty, out var userId))
+                return Unauthorized();
+
+            var passengersToUpdate = new List<Passenger>();
+            var passengers = await _passengerRepository.GetPassengersForBooking(bookingForEdit.Id);
+
+            foreach (var dto in bookingForEdit.Passengers)
+            {
+                var passengerToUpdate = _mapper.Map<Passenger>(dto);
+                passengersToUpdate.Add(passengerToUpdate);
+            }
+            for (int i = 0; i < passengersToUpdate.Count(); i++)
+            {
+                passengersToUpdate[i].Id = passengers[i].Id;
+            }
+
+            var updated = await _passengerRepository.UpdatePassengers(passengersToUpdate);
+
+            if (updated == null) return BadRequest("There was an error while processing Your request.");
+            return Ok();
+        }
     }
 }
