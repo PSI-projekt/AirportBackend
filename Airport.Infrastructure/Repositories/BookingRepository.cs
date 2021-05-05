@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Airport.Domain.DTOs;
 using Airport.Domain.Models;
 using Airport.Infrastructure.Interfaces;
 using Airport.Infrastructure.Persistence;
@@ -81,6 +83,21 @@ namespace Airport.Infrastructure.Repositories
             try
             {
                 _context.Update(booking);
+                return await _context.SaveChangesAsync() > 0;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+        public async Task<bool> Edit(BookingForEditDto bookingForEdit)
+        {
+            //var passengers = await _passengerRepository.GetPassengersForBooking(bookingForEdit.Id);
+            //bookingForEdit.Passengers = passengers;
+            try
+            {
+                _context.UpdateRange(bookingForEdit);
                 return await _context.SaveChangesAsync() > 0;
             }
             catch (Exception e)
