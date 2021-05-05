@@ -143,29 +143,24 @@ namespace AirportBackend.Controllers
         [HttpPatch("edit")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public async Task<IActionResult> Edit(BookingForEditDto bookingForEdit)
         {
             if (!int.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty, out var userId))
                 return Unauthorized();
 
-            var passengersToUpdate = new List<Passenger>();
-            var passengers = await _passengerRepository.GetPassengersForBooking(bookingForEdit.Id);
+            var booking = await _bookingRepository.GetById(bookingForEdit.Id);
 
-            foreach (var dto in bookingForEdit.Passengers)
-            {
-                var passengerToUpdate = _mapper.Map<Passenger>(dto);
-                passengersToUpdate.Add(passengerToUpdate);
-            }
-            for (int i = 0; i < passengersToUpdate.Count(); i++)
-            {
-                passengersToUpdate[i].Id = passengers[i].Id;
-            }
+            if (booking == null) return BadRequest("There was an error while processing Your request.");
 
+            if (booking.UserId != userId) return Unauthorized();
+
+            var passengersToUpdate = _mapper.Map<List<Passenger>>(bookingForEdit.Passengers);
+            
             var updated = await _passengerRepository.UpdatePassengers(passengersToUpdate);
-
-            if (updated == null) return BadRequest("There was an error while processing Your request.");
-            return Ok();
+            
+            return updated != null ? Ok() : BadRequest("There was an error while processing Your request.");
         }
     }
 }
