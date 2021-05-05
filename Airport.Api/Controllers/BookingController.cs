@@ -157,7 +157,20 @@ namespace AirportBackend.Controllers
             if (booking.UserId != userId) return Unauthorized();
 
             var passengersToUpdate = _mapper.Map<List<Passenger>>(bookingForEdit.Passengers);
-            
+
+            var passengersForBooking = await _passengerRepository.GetPassengersForBooking(bookingForEdit.Id, userId);
+
+            List<int> passengersId = new List<int>();
+
+            foreach (var passenger in passengersForBooking)
+            {
+                passengersId.Add(passenger.Id);
+            }
+            foreach (var passenger in passengersToUpdate)
+            {
+                if (!passengersId.Contains(passenger.Id))
+                    return Unauthorized();
+            }
             var updated = await _passengerRepository.UpdatePassengers(passengersToUpdate);
             
             return updated != null ? Ok() : BadRequest("There was an error while processing Your request.");
