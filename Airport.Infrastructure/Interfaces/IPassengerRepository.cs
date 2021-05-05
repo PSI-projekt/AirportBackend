@@ -12,6 +12,6 @@ namespace Airport.Infrastructure.Interfaces
         Task<Passenger> GetPassenger(PassengerForBookingDto dto);
         Task<List<PassengerForListDto>> GetPassengersForUser(int userId);
         Task<bool> AddPassengerBookings(IEnumerable<PassengerBooking> passengerBookings);
-        Task<List<PassengerForEditDto>> GetPassengersForBooking(int bookingId);
+        Task<List<PassengerForEditDto>> GetPassengersForBooking(int bookingId, int userId);
     }
 }

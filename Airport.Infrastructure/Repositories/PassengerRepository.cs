@@ -96,21 +96,13 @@ namespace Airport.Infrastructure.Repositories
                 return false;
             }
         }
-        public async Task<List<PassengerForEditDto>> GetPassengersForBooking(int bookingId)
+        public async Task<List<PassengerForEditDto>> GetPassengersForBooking(int bookingId, int userId)
         {
             try
             {
-                return await _context.Passengers
-                    .Join(_context.PassengerBookings,
-                        p => p.Id,
-                        b => b.PassengerId,
-                        (p, b) => new {
-                            passenger = p,
-                            booking = b
-                        })
-                    .Where(x => x.booking.BookingId == bookingId)
-                    .Select(x => x.passenger)
-                    .Distinct()
+                return await _context.PassengerBookings
+                    .Where(x => x.BookingId == bookingId && x.Booking.UserId == userId)
+                    .Select(x => x.Passenger)
                     .ProjectTo<PassengerForEditDto>(_mapper.ConfigurationProvider)
                     .AsNoTracking()
                     .ToListAsync();
