@@ -91,20 +91,5 @@ namespace Airport.Infrastructure.Repositories
                 return false;
             }
         }
-        public async Task<bool> Edit(BookingForEditDto bookingForEdit)
-        {
-            //var passengers = await _passengerRepository.GetPassengersForBooking(bookingForEdit.Id);
-            //bookingForEdit.Passengers = passengers;
-            try
-            {
-                _context.UpdateRange(bookingForEdit);
-                return await _context.SaveChangesAsync() > 0;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return false;
-            }
-        }
     }
 }

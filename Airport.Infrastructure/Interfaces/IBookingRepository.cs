@@ -10,6 +10,5 @@ namespace Airport.Infrastructure.Interfaces
         Task<Booking> Add(Booking booking);
         Task<bool> Cancel(int bookingId);
         Task<Booking> GetById(int bookingId);
-        Task<bool> Edit(BookingForEditDto bookingForEdit);
     }
 }
