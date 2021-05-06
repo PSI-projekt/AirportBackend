@@ -13,7 +13,7 @@ namespace Airport.Domain.Email.Builders
             return new EmailMessage
             {
                 Receiver = new MailboxAddress(username, receiver),
-                Subject = "My Pics e-mail confirmation",
+                Subject = "OpoleAirport e-mail confirmation",
                 Content = messageBody
             };
         }
