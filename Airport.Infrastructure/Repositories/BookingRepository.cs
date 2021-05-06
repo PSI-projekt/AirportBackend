@@ -50,5 +50,24 @@ namespace Airport.Infrastructure.Repositories
                 return null;
             }
         }
+
+        public async Task<Booking> GetByPaymentReference(string paymentReference)
+        {
+            try
+            {
+                return await _context.Payments
+                    .Where(x => x.ReferenceNumber == paymentReference)
+                    .Include(x => x.Booking.Flight.Origin)
+                    .Include(x => x.Booking.Flight.Destination)
+                    .Select(x => x.Booking)
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
     }
 }
