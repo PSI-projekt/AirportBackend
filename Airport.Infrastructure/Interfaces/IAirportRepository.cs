@@ -10,5 +10,6 @@ namespace Airport.Infrastructure.Interfaces
         Task<bool> Add(AirportEntity airport);
         Task<int> GetNumberOfAirports();
         Task<List<AirportForListDto>> GetAirports();
+        Task<bool> Edit(AirportForEditDto airportForEdit);
     }
 }

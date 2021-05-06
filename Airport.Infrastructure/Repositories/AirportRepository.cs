@@ -64,5 +64,45 @@ namespace Airport.Infrastructure.Repositories
                 return null;
             }
         }
+
+        public async Task<bool> Edit(AirportForEditDto airportForEdit)
+        {
+            var airport = await GetById(airportForEdit.Id);
+            try
+            {
+                _mapper.Map(airportForEdit, airport);
+                return await Update(airport);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+        private async Task<bool> Update(AirportEntity airport)
+        {
+            try
+            {
+                _context.Update(airport);
+                return await _context.SaveChangesAsync() > 0;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+        public async Task<AirportEntity> GetById(int airportId)
+        {
+            try
+            {
+                return await _context.Airports.FirstOrDefaultAsync(x => x.Id == airportId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
     }
 }
