@@ -8,6 +8,7 @@ using Airport.Domain.DTOs;
 using Airport.Domain.Models;
 using Airport.Infrastructure.Interfaces;
 using AirportBackend.Configuration;
+using AirportBackend.Enums;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -62,7 +63,7 @@ namespace AirportBackend.Controllers
                 FlightId = bookingForAdd.FlightId,
                 NumberOfPassengers = bookingForAdd.Passengers.Count(),
                 DateOfBooking = DateTime.UtcNow,
-                IsAccepted = false
+                IsCancelled = false
             };
 
             var bookingResult = await _bookingRepository.Add(bookingToAdd);
@@ -116,6 +117,63 @@ namespace AirportBackend.Controllers
             paymentDto.Swift = Constants.Swift;
 
             return Ok(paymentDto);
+        }
+        
+        [HttpPatch("cancel")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public async Task<IActionResult> Cancel(int bookingId)
+        {
+            if (!int.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty, out var _))
+                return Unauthorized();
+
+            var privilages = new List<int>() { (int)UserPrivileges.Administrator, (int)UserPrivileges.Employee };
+
+            int.TryParse(User.FindFirst(ClaimTypes.Role)?.Value, out var privilagesId);
+
+            if (!privilages.Contains(privilagesId))
+                return StatusCode((int)HttpStatusCode.Unauthorized);
+
+            var result = await _bookingRepository.Cancel(bookingId);
+
+            return result ? Ok() : StatusCode((int)HttpStatusCode.InternalServerError);
+        }
+        
+        [HttpPatch("edit")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public async Task<IActionResult> Edit(BookingForEditDto bookingForEdit)
+        {
+            if (!int.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty, out var userId))
+                return Unauthorized();
+
+            var booking = await _bookingRepository.GetById(bookingForEdit.Id);
+
+            if (booking == null) return BadRequest("There was an error while processing Your request.");
+
+            if (booking.UserId != userId) return Unauthorized();
+
+            var passengersToUpdate = _mapper.Map<List<Passenger>>(bookingForEdit.Passengers);
+
+            var passengersForBooking = await _passengerRepository.GetPassengersForBooking(bookingForEdit.Id, userId);
+
+            List<int> passengersId = new List<int>();
+
+            foreach (var passenger in passengersForBooking)
+            {
+                passengersId.Add(passenger.Id);
+            }
+            foreach (var passenger in passengersToUpdate)
+            {
+                if (!passengersId.Contains(passenger.Id))
+                    return Unauthorized();
+            }
+            var updated = await _passengerRepository.UpdatePassengers(passengersToUpdate);
+            
+            return updated != null ? Ok() : BadRequest("There was an error while processing Your request.");
         }
     }
 }
