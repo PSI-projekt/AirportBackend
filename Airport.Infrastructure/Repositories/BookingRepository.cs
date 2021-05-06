@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Airport.Domain.DTOs;
 using Airport.Domain.Models;
 using Airport.Infrastructure.Interfaces;
 using Airport.Infrastructure.Persistence;
@@ -22,7 +24,7 @@ namespace Airport.Infrastructure.Repositories
             try
             {
                 return await _context.Bookings
-                    .Where(x => x.FlightId == flightId)
+                    .Where(x => x.FlightId == flightId && x.IsCancelled != true)
                     .AsNoTracking()
                     .Select(x => x.NumberOfPassengers)
                     .SumAsync();
@@ -67,6 +69,48 @@ namespace Airport.Infrastructure.Repositories
             {
                 Console.WriteLine(e);
                 return null;
+            }
+        }
+
+        public async Task<bool> Cancel(int bookingId) 
+        {
+            var booking = await GetById(bookingId);
+            try
+            {
+                booking.IsCancelled = true;
+                return await Update(booking);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+        
+        public async Task<Booking> GetById(int bookingId)
+        {
+            try
+            {
+                return await _context.Bookings.FirstOrDefaultAsync(x => x.Id == bookingId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
+        
+        private async Task<bool> Update(Booking booking)
+        {
+            try
+            {
+                _context.Update(booking);
+                return await _context.SaveChangesAsync() > 0;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
             }
         }
     }

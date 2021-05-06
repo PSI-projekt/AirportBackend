@@ -96,5 +96,22 @@ namespace Airport.Infrastructure.Repositories
                 return false;
             }
         }
+        public async Task<List<PassengerForEditDto>> GetPassengersForBooking(int bookingId, int userId)
+        {
+            try
+            {
+                return await _context.PassengerBookings
+                    .Where(x => x.BookingId == bookingId && x.Booking.UserId == userId)
+                    .Select(x => x.Passenger)
+                    .ProjectTo<PassengerForEditDto>(_mapper.ConfigurationProvider)
+                    .AsNoTracking()
+                    .ToListAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
     }
 }
