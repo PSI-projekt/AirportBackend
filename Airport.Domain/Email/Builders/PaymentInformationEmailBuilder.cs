@@ -8,14 +8,14 @@ namespace Airport.Domain.Email.Builders
         public static EmailMessage BuildPaymentInformationMessage(string receiver, string username,
             string referenceNumber, string iban, string bic, double amount, FlightDetailsDto flightDetails)
         {
-            var messageBody = $"Hello {username}!<br/>";
+            var messageBody = $"Hello {username}!<br/>"; 
             messageBody += "Thank you for choosing OpoleAirport! <br/>";
-            messageBody += "Your flight is now booked. Before making payement, please check if your flight details are correct. You can find them below.<br/><br/>";
+            messageBody += "Your flight is now booked. Before making payement, please check if your booking details are correct. You can find them below.<br/><br/>";
 
             messageBody += $"Origin: <b>{flightDetails.Origin.City}</b><br/>";
             messageBody += $"Destination: <b>{flightDetails.Destination.City}</b><br/>";
-            messageBody += $"Date of arrival: <b>{flightDetails.DateOfArrival}</b><br/>";
-            messageBody += $"Date of arrival: <b>{flightDetails.DateOfDeparture}</b><br/>";
+            messageBody += $"Date of departure: <b>{flightDetails.DateOfDeparture.ToString("dddd, dd MMMM yyyy, HH:mm")}</b><br/>";
+            messageBody += $"Date of arrival: <b>{flightDetails.DateOfArrival.ToString("dddd, dd MMMM yyyy, HH:mm")}</b><br/>";
             messageBody += $"Airplane: <b>{flightDetails.Airplane.Maker} {flightDetails.Airplane.Model}</b><br/>";
             messageBody += $"Flight number: <b>{flightDetails.FlightNumber}</b><br/><br/>";
 
@@ -25,7 +25,7 @@ namespace Airport.Domain.Email.Builders
             messageBody += $"Title of payment: <b>{referenceNumber}</b><br/>";
             messageBody += $"Amount: <b>{amount}</b><br/><br/>";
 
-            messageBody += "We will send you another email with payment confirmation after your transfer.<br/>";
+            messageBody += "We will send you another email with payment confirmation after your money transfer.<br/>";
             messageBody += "You can check the details on our website in Your reservation history.";
             return new EmailMessage
             {
