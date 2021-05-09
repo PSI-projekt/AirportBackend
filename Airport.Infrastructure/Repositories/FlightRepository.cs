@@ -137,8 +137,6 @@ namespace Airport.Infrastructure.Repositories
             {
                 return await _context.Flights
                     .Where(x => x.Id == flightId)
-                    .Include(x => x.Origin)
-                    .Include(x => x.Destination)
                     .ProjectTo<FlightDetailsDto>(_mapper.ConfigurationProvider)
                     .FirstOrDefaultAsync();
             }
