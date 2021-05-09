@@ -5,6 +5,7 @@ using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Airport.Domain.DTOs;
+using Airport.Domain.Email.Builders;
 using Airport.Domain.Models;
 using Airport.Infrastructure.Interfaces;
 using AirportBackend.Configuration;
@@ -25,18 +26,22 @@ namespace AirportBackend.Controllers
         private readonly IAirplaneRepository _airplaneRepository;
         private readonly IPaymentRepository _paymentRepository;
         private readonly IFlightRepository _flightRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
+        private readonly IEmailService _emailService;
 
         public BookingController(IBookingRepository bookingRepository, IPassengerRepository passengerRepository,
             IAirplaneRepository airplaneRepository, IPaymentRepository paymentRepository, 
-            IFlightRepository flightRepository, IMapper mapper)
+            IFlightRepository flightRepository, IUserRepository userRepository, IMapper mapper, IEmailService emailService)
         {
             _bookingRepository = bookingRepository;
             _passengerRepository = passengerRepository;
             _airplaneRepository = airplaneRepository;
             _paymentRepository = paymentRepository;
             _flightRepository = flightRepository;
+            _userRepository = userRepository;
             _mapper = mapper;
+            _emailService = emailService;
         }
 
         [HttpPost]
@@ -116,6 +121,19 @@ namespace AirportBackend.Controllers
             paymentDto.Iban = Constants.Iban;
             paymentDto.Swift = Constants.Swift;
 
+            var user = await _userRepository.GetUserById(userId);
+
+            if (user == null) return Ok("There was an error while processing Your request.");
+
+            var flightDetails = _flightRepository.GetDetailsById(bookingForAdd.FlightId);
+
+            if (flightDetails == null) return Ok("There was an error while processing Your request.");
+
+            var emailResult = await SendEmail(user.Email, user.Username,
+                paymentDto.ReferenceNumber, paymentDto.Iban, paymentDto.Swift, paymentDto.Amount, flightDetails.Result);
+
+            if (!emailResult) return Ok("There was an error while processing Your request.");
+
             return Ok(paymentDto);
         }
         
@@ -174,6 +192,14 @@ namespace AirportBackend.Controllers
             var updated = await _passengerRepository.UpdatePassengers(passengersToUpdate);
             
             return updated != null ? Ok() : BadRequest("There was an error while processing Your request.");
+        }
+        private async Task<bool> SendEmail(string receiver, string username,
+            string referenceNumber, string iban, string bic, double amount, FlightDetailsDto flightDetails)
+        {
+            var message = PaymentInformationEmailBuilder
+                .BuildPaymentInformationMessage(receiver, username, referenceNumber, iban, bic, amount, flightDetails);
+
+            return await _emailService.SendEmail(message);
         }
     }
 }
