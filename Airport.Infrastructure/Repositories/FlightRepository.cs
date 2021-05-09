@@ -131,5 +131,22 @@ namespace Airport.Infrastructure.Repositories
                 return false;
             }
         }
+        public async Task<FlightDetailsDto> GetDetailsById(int flightId)
+        {
+            try
+            {
+                return await _context.Flights
+                    .Where(x => x.Id == flightId)
+                    .Include(x => x.Origin)
+                    .Include(x => x.Destination)
+                    .ProjectTo<FlightDetailsDto>(_mapper.ConfigurationProvider)
+                    .FirstOrDefaultAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
     }
 }

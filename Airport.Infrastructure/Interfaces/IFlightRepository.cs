@@ -14,5 +14,6 @@ namespace Airport.Infrastructure.Interfaces
         Task<bool> UpdateStatus(FlightForStatusChangeDto flightForStatusChange);
         Task<bool> Delete(int flightId);
         Task<Flight> GetById(int flightId);
+        Task<FlightDetailsDto> GetDetailsById(int flightId);
     }
 }
