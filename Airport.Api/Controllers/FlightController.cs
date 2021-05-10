@@ -163,5 +163,20 @@ namespace AirportBackend.Controllers
 
             return result ? Ok() : StatusCode((int)HttpStatusCode.InternalServerError);
         }
+        
+        [HttpGet ("details/{flightId}")]
+        [AllowAnonymous]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public async Task<IActionResult> GetDetailsById(int flightId)
+        {
+            var result = await _flightRepository.GetDetailsById(flightId);
+
+            if (result == null) return BadRequest("Could not find any flight with this ID");
+
+            return result != null ? Ok(result) : StatusCode((int)HttpStatusCode.InternalServerError);
+        }
+
     }
 }
