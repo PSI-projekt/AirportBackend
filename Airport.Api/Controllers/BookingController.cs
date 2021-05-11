@@ -178,7 +178,7 @@ namespace AirportBackend.Controllers
 
             var passengersForBooking = await _passengerRepository.GetPassengersForBooking(bookingForEdit.Id, userId);
 
-            List<int> passengersId = new List<int>();
+            var passengersId = new List<int>();
 
             foreach (var passenger in passengersForBooking)
             {
