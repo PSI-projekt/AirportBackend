@@ -11,6 +11,6 @@ namespace Airport.Domain.DTOs
         public AirportForListDto Origin { get; set; }
         public AirportForListDto Destination { get; set; }
         public string FlightNumber { get; set; }
-        public Airplane Airplane { get; set; }
+        public AirplaneForBookingDto Airplane { get; set; }
     }
 }
