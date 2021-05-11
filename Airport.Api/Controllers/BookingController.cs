@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Airport.Domain.DTOs;
 using Airport.Domain.Email.Builders;
 using Airport.Domain.Models;
+using Airport.Domain.PDF.Builders;
 using Airport.Infrastructure.Interfaces;
 using AirportBackend.Configuration;
 using AirportBackend.Enums;
@@ -193,6 +196,42 @@ namespace AirportBackend.Controllers
             
             return updated != null ? Ok() : BadRequest("There was an error while processing Your request.");
         }
+
+        [HttpGet("pdf/{bookingId}")]
+        [ProducesResponseType(typeof(File), (int) HttpStatusCode.OK)]
+        [ProducesResponseType((int) HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int) HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int) HttpStatusCode.InternalServerError)]
+        public async Task<IActionResult> GetTicket(int bookingId)
+        {
+            if (!int.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty, out var userId))
+                return Unauthorized();
+
+            var booking = await _bookingRepository.GetById(bookingId);
+
+            if (booking == null) return BadRequest("Booking does not exist.");
+
+            if (booking.UserId != userId) return Unauthorized();
+
+            var flight = await _flightRepository.GetDetailsById(booking.FlightId);
+            
+            if (flight == null) return BadRequest("There was an error while processing Your request.");
+
+            var passengers = await _passengerRepository.GetPassengersForBooking(bookingId, userId);
+            
+            if (passengers == null) return BadRequest("There was an error while processing Your request.");
+
+            var user = await _userRepository.GetUserById(userId);
+            
+            if (user == null) return BadRequest("There was an error while processing Your request.");
+
+            var pdf = TicketPdfBuilder.BuildTicketPdf(passengers, booking, flight, user);
+
+            return pdf != null && pdf.Length > 0
+                ? File(pdf, "application/pdf", $"Ticket{booking.Id}.pdf")
+                : StatusCode((int) HttpStatusCode.InternalServerError);
+        }
+        
         private async Task<bool> SendEmail(string receiver, string username,
             string referenceNumber, string iban, string bic, double amount, FlightDetailsDto flightDetails)
         {
