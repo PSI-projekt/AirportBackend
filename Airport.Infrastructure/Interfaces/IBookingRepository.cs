@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Airport.Domain.DTOs;
 using Airport.Domain.Models;
@@ -11,5 +12,6 @@ namespace Airport.Infrastructure.Interfaces
         Task<Booking> GetByPaymentReference(string paymentReference);
         Task<bool> Cancel(int bookingId);
         Task<Booking> GetById(int bookingId);
+        Task<List<BookingForListDto>> GetBookingsByUserId(int userId);
     }
 }

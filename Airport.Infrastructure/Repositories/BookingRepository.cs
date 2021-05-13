@@ -6,6 +6,8 @@ using Airport.Domain.DTOs;
 using Airport.Domain.Models;
 using Airport.Infrastructure.Interfaces;
 using Airport.Infrastructure.Persistence;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Airport.Infrastructure.Repositories
@@ -13,10 +15,12 @@ namespace Airport.Infrastructure.Repositories
     public class BookingRepository : IBookingRepository
     {
         private readonly AirportDbContext _context;
+        private readonly IMapper _mapper;
 
-        public BookingRepository(AirportDbContext context)
+        public BookingRepository(AirportDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
         
         public async Task<int> GetNumberOfPassengersForFlight(int flightId)
@@ -111,6 +115,22 @@ namespace Airport.Infrastructure.Repositories
             {
                 Console.WriteLine(e);
                 return false;
+            }
+        }
+        public async Task<List<BookingForListDto>> GetBookingsByUserId(int userId)
+        {
+            try
+            {
+                return await _context.Bookings
+                    .Where(x => x.UserId == userId)
+                    .ProjectTo<BookingForListDto>(_mapper.ConfigurationProvider)
+                    .AsNoTracking()
+                    .ToListAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
             }
         }
     }

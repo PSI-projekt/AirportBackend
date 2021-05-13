@@ -231,7 +231,7 @@ namespace AirportBackend.Controllers
                 ? File(pdf, "application/pdf", $"Ticket{booking.Id}.pdf")
                 : StatusCode((int) HttpStatusCode.InternalServerError);
         }
-        
+
         private async Task<bool> SendEmail(string receiver, string username,
             string referenceNumber, string iban, string bic, double amount, FlightDetailsDto flightDetails)
         {
@@ -239,6 +239,37 @@ namespace AirportBackend.Controllers
                 .BuildPaymentInformationMessage(receiver, username, referenceNumber, iban, bic, amount, flightDetails);
 
             return await _emailService.SendEmail(message);
+        }
+
+        [HttpGet("bookings")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public async Task<IActionResult> GetBookingsByUserId()
+        {
+            if (!int.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty, out var userId))
+                return Unauthorized();
+
+            var bookings = await _bookingRepository.GetBookingsByUserId(userId);
+
+            if (bookings == null) return BadRequest("Could not find any bookings for this user");
+
+            for (int i = 0; i < bookings.Count; i++)
+            {
+                var flightDetails = await _flightRepository.GetDetailsById(bookings[i].Id);
+
+                if (flightDetails == null) return BadRequest("Could not find any flight for this booking");
+
+                bookings[i].FlightDetails = flightDetails;
+
+                var passengers = await _passengerRepository.GetPassengersForBooking(bookings[i].Id, userId);
+
+                if (passengers == null) return BadRequest("Could not find any passengers for this booking");
+
+                bookings[i].Passengers = passengers;
+            }
+
+            return bookings != null ? Ok(bookings) : StatusCode((int)HttpStatusCode.InternalServerError);
         }
     }
 }
