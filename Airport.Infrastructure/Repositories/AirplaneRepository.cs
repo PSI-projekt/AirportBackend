@@ -68,5 +68,59 @@ namespace Airport.Infrastructure.Repositories
                 return null;
             }
         }
+
+        public async Task<bool> Edit(AirplaneForEditDto airplaneForEdit)
+        {
+            var airplane = await GetById(airplaneForEdit.Id);
+            try
+            {
+                _mapper.Map(airplaneForEdit, airplane);
+                return await Update(airplane);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+        private async Task<bool> Update(Airplane airplane)
+        {
+            try
+            {
+                _context.Update(airplane);
+                return await _context.SaveChangesAsync() > 0;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+        public async Task<Airplane> GetById(int airplaneId)
+        {
+            try
+            {
+                return await _context.Airplanes.FirstOrDefaultAsync(x => x.Id == airplaneId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
+        public async Task<bool> Delete(int airplaneId)
+        {
+            var airplane = await GetById(airplaneId);
+            try
+            {
+                airplane.IsRetired = true;
+                return await Update(airplane);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
     }
 }
