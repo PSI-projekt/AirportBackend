@@ -18,8 +18,6 @@ namespace Airport.Domain.DTOs
         [Required]
         public bool IsInRepair { get; set; }
         [Required]
-        public int LocationId { get; set; }
-        [Required]
-        public bool IsRetired { get; set; }
+        public int LocationId { get; set; }       
     }
 }
