@@ -11,6 +11,7 @@ namespace AirportBackend.Helpers
             CreateMap<UserForRegisterDto, User>();
             CreateMap<AirportForAddDto, AirportEntity>();
             CreateMap<AirplaneForAddDto, Airplane>();
+            CreateMap<AirplaneForEditDto, Airplane>();
             CreateMap<FlightForAddDto, Flight>();
             CreateMap<FlightForEditDto, Flight>();
             CreateMap<Flight, FlightForListDto>();
