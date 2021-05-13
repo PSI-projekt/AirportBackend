@@ -13,6 +13,7 @@ namespace Airport.Domain.Models
         public int LocationId { get; set; }      
         public AirportEntity Location { get; set; }
         public int NumberOfSeats { get; set; }
+        public bool IsRetired { get; set; }
 
         public virtual IEnumerable<Flight> Flights { get; set; }
     }
