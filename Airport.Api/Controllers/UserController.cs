@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Airport.Domain.DTOs;
 using Airport.Infrastructure.Interfaces;
 using Airport.Infrastructure.Repositories;
+using AirportBackend.Enums;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -53,8 +55,9 @@ namespace AirportBackend.Controllers
 
             int.TryParse(User.FindFirst(ClaimTypes.Role)?.Value, out var privilagesId);
 
-            if (!privilages.Contains(privilagesId) || loggedUserId != userForEdit.Id)
-                return StatusCode((int)HttpStatusCode.Unauthorized);
+            if(loggedUserId != userForEdit.Id)
+                if (!privilages.Contains(privilagesId))
+                    return StatusCode((int)HttpStatusCode.Unauthorized);
 
             var result = await _userRepository.Edit(userForEdit);
 
@@ -74,8 +77,9 @@ namespace AirportBackend.Controllers
         
             int.TryParse(User.FindFirst(ClaimTypes.Role)?.Value, out var privilagesId);
 
-            if (!privilages.Contains(privilagesId) || loggedUserId != userId)
-                return StatusCode((int)HttpStatusCode.Unauthorized);
+            if (loggedUserId != userId)
+                if (!privilages.Contains(privilagesId))
+                    return StatusCode((int)HttpStatusCode.Unauthorized);
 
             var result = await _userRepository.Delete(userId);
 

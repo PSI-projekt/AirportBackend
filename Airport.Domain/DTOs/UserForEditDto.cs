@@ -6,8 +6,6 @@ namespace Airport.Domain.DTOs
     public class UserForEditDto
     {
         [Required]
-        public string Username { get; set; }
-        [Required]
         public int Id { get; set; }
         [Required]
         public string FirstName { get; set; }
@@ -25,11 +23,5 @@ namespace Airport.Domain.DTOs
         public string PostCode { get; set; }
         [Required]
         public string IDNumber { get; set; }
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; }
-        [Required]
-        [StringLength(40, MinimumLength = 8, ErrorMessage = "You must specify password between 8 and 40 characters")]
-        public string Password { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Airport.Domain.DTOs;
 using Airport.Domain.Models;
 
 namespace Airport.Infrastructure.Interfaces

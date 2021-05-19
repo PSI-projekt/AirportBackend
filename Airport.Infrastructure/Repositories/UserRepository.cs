@@ -37,7 +37,7 @@ namespace Airport.Infrastructure.Repositories
         }
         public async Task<bool> Edit(UserForEditDto userForEdit)
         {
-            var user = await GetById(airplaneForEdit.Id);
+            var user = await GetUserById(userForEdit.Id);
             try
             {
                 _mapper.Map(userForEdit, user);
@@ -64,7 +64,7 @@ namespace Airport.Infrastructure.Repositories
         }
         public async Task<bool> Delete(int userId)
         {
-            var user = await GetById(userId);
+            var user = await GetUserById(userId);
             try
             {
                 user.Username = null;
