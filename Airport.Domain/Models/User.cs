@@ -23,7 +23,7 @@ namespace Airport.Domain.Models
         public bool IsConfirmed { get; set; }
         [Encrypted] public string RegistrationToken { get; set; }
         public DateTime RegistrationTokenGeneratedTime { get; set; }
-
-        public virtual IEnumerable<Booking> Bookings { get; set; }
+        public bool IsDeleted { get; set; }
+        public virtual IEnumerable<Booking> Bookings { get; set; }        
     }
 }
