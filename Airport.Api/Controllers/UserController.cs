@@ -39,5 +39,47 @@ namespace AirportBackend.Controllers
                 ? Ok(_mapper.Map<UserForDetailsDto>(result))
                 : StatusCode((int) HttpStatusCode.InternalServerError);
         }
+
+        [HttpPatch]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public async Task<IActionResult> Update(UserForEditDto userForEdit)
+        {
+            if (!int.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty, out var loggedUserId))
+                return Unauthorized();
+
+            var privilages = new List<int>() { (int)UserPrivileges.Administrator, (int)UserPrivileges.Employee };
+
+            int.TryParse(User.FindFirst(ClaimTypes.Role)?.Value, out var privilagesId);
+
+            if (!privilages.Contains(privilagesId) || loggedUserId != userForEdit.Id)
+                return StatusCode((int)HttpStatusCode.Unauthorized);
+
+            var result = await _userRepository.Edit(userForEdit);
+
+            return result ? Ok() : StatusCode((int)HttpStatusCode.InternalServerError);
+        }
+
+        [HttpPatch("delete")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public async Task<IActionResult> Delete(int userId)
+        {
+            if (!int.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty, out var loggedUserId))
+                return Unauthorized();
+        
+            var privilages = new List<int>() { (int)UserPrivileges.Administrator, (int)UserPrivileges.Employee };
+        
+            int.TryParse(User.FindFirst(ClaimTypes.Role)?.Value, out var privilagesId);
+
+            if (!privilages.Contains(privilagesId) || loggedUserId != userId)
+                return StatusCode((int)HttpStatusCode.Unauthorized);
+
+            var result = await _userRepository.Delete(userId);
+
+            return result ? Ok() : StatusCode((int)HttpStatusCode.InternalServerError);
+        }
     }
 }
