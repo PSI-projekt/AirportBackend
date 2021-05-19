@@ -13,8 +13,6 @@ namespace Airport.Domain.DTOs
         [StringLength(40, MinimumLength = 8, ErrorMessage = "You must specify password between 8 and 40 characters")]
         public string Password { get; set; }
         [Required]
-        public int Privileges { get; set; }
-        [Required]
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
