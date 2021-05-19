@@ -18,7 +18,5 @@ namespace Airport.Domain.DTOs
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
-        [Required]
-        public string IDNumber { get; set; }
     }
 }
