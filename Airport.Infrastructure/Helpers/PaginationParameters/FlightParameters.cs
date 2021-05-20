@@ -2,7 +2,7 @@
 {
     public class FlightParameters
     {
-        private const int MaxPageSize = 20;
+        private const int MaxPageSize = 50;
         private readonly int _pageNumber = 1;
         private readonly int _pageSize = 10;
 
