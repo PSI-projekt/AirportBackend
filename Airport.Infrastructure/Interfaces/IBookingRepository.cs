@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Airport.Domain.DTOs;
 using Airport.Domain.Models;
+using Airport.Infrastructure.Helpers;
+using Airport.Infrastructure.Helpers.PaginationParameters;
 
 namespace Airport.Infrastructure.Interfaces
 {
@@ -12,6 +14,6 @@ namespace Airport.Infrastructure.Interfaces
         Task<Booking> GetByPaymentReference(string paymentReference);
         Task<bool> Cancel(int bookingId);
         Task<Booking> GetById(int bookingId);
-        Task<List<BookingForListDto>> GetBookingsByUserId(int userId);
+        Task<PagedList<BookingForListDto>> GetBookingsByUserId(int userId, BookingParameters parameters);
     }
 }

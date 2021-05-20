@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Airport.Domain.DTOs;
 using Airport.Domain.Models;
+using Airport.Infrastructure.Helpers;
+using Airport.Infrastructure.Helpers.PaginationParameters;
 using Airport.Infrastructure.Interfaces;
 using Airport.Infrastructure.Persistence;
 using AutoMapper;
@@ -117,15 +119,18 @@ namespace Airport.Infrastructure.Repositories
                 return false;
             }
         }
-        public async Task<List<BookingForListDto>> GetBookingsByUserId(int userId)
+        public async Task<PagedList<BookingForListDto>> GetBookingsByUserId(int userId, BookingParameters parameters)
         {
             try
             {
-                return await _context.Bookings
+                var bookings = _context.Bookings
                     .Where(x => x.UserId == userId)
+                    .OrderByDescending(x => x.DateOfBooking)
                     .ProjectTo<BookingForListDto>(_mapper.ConfigurationProvider)
-                    .AsNoTracking()
-                    .ToListAsync();
+                    .AsNoTracking();
+
+                return await PagedList<BookingForListDto>.CreateAsync(bookings, parameters.PageNumber,
+                    parameters.PageSize);
             }
             catch (Exception e)
             {
