@@ -10,9 +10,12 @@ using Airport.Domain.DTOs;
 using Airport.Domain.Email.Builders;
 using Airport.Domain.Models;
 using Airport.Domain.PDF.Builders;
+using Airport.Infrastructure.Helpers;
+using Airport.Infrastructure.Helpers.PaginationParameters;
 using Airport.Infrastructure.Interfaces;
 using AirportBackend.Configuration;
 using AirportBackend.Enums;
+using AirportBackend.Extensions;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -242,34 +245,37 @@ namespace AirportBackend.Controllers
         }
 
         [HttpGet("bookings")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(PagedList<BookingForListDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> GetBookingsByUserId()
+        public async Task<IActionResult> GetBookingsByUserId([FromQuery] BookingParameters parameters)
         {
             if (!int.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty, out var userId))
                 return Unauthorized();
 
-            var bookings = await _bookingRepository.GetBookingsByUserId(userId);
+            var bookings = await _bookingRepository.GetBookingsByUserId(userId, parameters);
 
             if (bookings == null) return BadRequest("Could not find any bookings for this user");
 
-            for (int i = 0; i < bookings.Count; i++)
+            foreach (var booking in bookings)
             {
-                var flightDetails = await _flightRepository.GetDetailsById(bookings[i].Id);
+                var flightDetails = await _flightRepository.GetDetailsById(booking.Id);
 
                 if (flightDetails == null) return BadRequest("Could not find any flight for this booking");
 
-                bookings[i].FlightDetails = flightDetails;
-
-                var passengers = await _passengerRepository.GetPassengersForBooking(bookings[i].Id, userId);
+                booking.FlightDetails = flightDetails;
+                
+                var passengers = await _passengerRepository.GetPassengersForBooking(booking.Id, userId);
 
                 if (passengers == null) return BadRequest("Could not find any passengers for this booking");
 
-                bookings[i].Passengers = passengers;
+                booking.Passengers = passengers;
             }
 
-            return bookings != null ? Ok(bookings) : StatusCode((int)HttpStatusCode.InternalServerError);
+            Response.AddPaginationHeader(bookings.CurrentPage, bookings.PageSize, bookings.TotalCount,
+                bookings.TotalPages);
+
+            return Ok(bookings);
         }
     }
 }
