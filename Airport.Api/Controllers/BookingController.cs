@@ -259,7 +259,7 @@ namespace AirportBackend.Controllers
 
             foreach (var booking in bookings)
             {
-                var flightDetails = await _flightRepository.GetDetailsById(booking.Id);
+                var flightDetails = await _flightRepository.GetDetailsById(booking.FlightId);
 
                 if (flightDetails == null) return BadRequest("Could not find any flight for this booking");
 
