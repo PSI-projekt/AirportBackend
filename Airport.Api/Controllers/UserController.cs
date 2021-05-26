@@ -64,7 +64,7 @@ namespace AirportBackend.Controllers
             return result ? Ok() : StatusCode((int)HttpStatusCode.InternalServerError);
         }
 
-        [HttpPatch("delete")]
+        [HttpPatch("delete/{userId}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
