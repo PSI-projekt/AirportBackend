@@ -47,6 +47,12 @@ namespace AirportBackend.Controllers
             if (!privileges.Contains(privilegesId))
                 return StatusCode((int)HttpStatusCode.Unauthorized);
 
+            var payment = await _paymentRepository.GetByReferenceNumber(dto.ReferenceNumber);
+
+            if (payment == null) return BadRequest("This payment does not exist");
+
+            if (payment.IsPaid == true) return BadRequest("This payment is already confirmed");
+
             var result = await _paymentRepository.Confirm(dto.ReferenceNumber);
             
             if (!result) return StatusCode((int)HttpStatusCode.InternalServerError);

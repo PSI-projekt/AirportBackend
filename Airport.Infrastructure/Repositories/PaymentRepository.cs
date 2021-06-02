@@ -51,7 +51,7 @@ namespace Airport.Infrastructure.Repositories
             return await Update(payment);
         }
 
-        private async Task<Payment> GetByReferenceNumber(string referenceNumber)
+        public async Task<Payment> GetByReferenceNumber(string referenceNumber)
         {
             try
             {
