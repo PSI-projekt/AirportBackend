@@ -2,6 +2,7 @@
 {
     public class AirplaneForListDto
     {
+        public int Id { get; set; }
         public string Maker { get; set; }
         public string Model { get; set; }
         public string Identifier { get; set; }
