@@ -1,5 +1,5 @@
 # AirportBackend
-Backend application for Airprt.  
+Backend application for Airport.  
 Application allows basic functionality for the users, and provide management capabilites for administrators and employees.  
 Application uses Web API for communicaiton. Implementaiton of Swagger allows for creating easy to understand documentation.  
 Frontend part of this application is presented in [this](https://github.com/PSI-projekt/AirportFrontend) project.
