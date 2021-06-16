@@ -82,7 +82,7 @@
   {
     "Maker": "Airbus",
     "Model": "A380",
-    "Identifier": "ABC12345",
+    "Identifier": "ABC16445",
     "Airline": "Lufthansa",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -90,7 +90,7 @@
   {
     "Maker": "Airbus",
     "Model": "A321",
-    "Identifier": "OLD45314",
+    "Identifier": "OLD41854",
     "Airline": "Lot",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -98,7 +98,7 @@
   {
     "Maker": "Airbus",
     "Model": "A320",
-    "Identifier": "ITR65634",
+    "Identifier": "ITR43637",
     "Airline": "Turkish Airlines",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -106,7 +106,7 @@
   {
     "Maker": "Airbus",
     "Model": "A330",
-    "Identifier": "LKA53521",
+    "Identifier": "LKA94365",
     "Airline": "Ryanair",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -114,7 +114,7 @@
   {
     "Maker": "Airbus",
     "Model": "A340",
-    "Identifier": "UCS63531",
+    "Identifier": "UCS58324",
     "Airline": "Wizzair",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -122,7 +122,7 @@
   {
     "Maker": "Boeing",
     "Model": "737",
-    "Identifier": "LLA13462",
+    "Identifier": "LLA12345",
     "Airline": "Condor",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -130,7 +130,7 @@
   {
     "Maker": "Boeing",
     "Model": "747",
-    "Identifier": "AFG65421",
+    "Identifier": "AFG09542",
     "Airline": "Delta",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -138,7 +138,7 @@
   {
     "Maker": "Boeing",
     "Model": "767",
-    "Identifier": "AAC12321",
+    "Identifier": "AAC43596",
     "Airline": "Emirates",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -146,7 +146,7 @@
   {
     "Maker": "Boeing",
     "Model": "777",
-    "Identifier": "BCA42313",
+    "Identifier": "BCA65106",
     "Airline": "KLM",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -154,7 +154,7 @@
   {
     "Maker": "Boeing",
     "Model": "787",
-    "Identifier": "ZZZ44411",
+    "Identifier": "ZZZ76428",
     "Airline": "AirAsia",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -162,7 +162,7 @@
   {
     "Maker": "Airbus",
     "Model": "A380",
-    "Identifier": "ABC12345",
+    "Identifier": "ABC84661",
     "Airline": "Lufthansa",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -170,7 +170,7 @@
   {
     "Maker": "Airbus",
     "Model": "A321",
-    "Identifier": "OLD45314",
+    "Identifier": "OLD47235",
     "Airline": "Lot",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -178,7 +178,7 @@
   {
     "Maker": "Airbus",
     "Model": "A320",
-    "Identifier": "ITR65634",
+    "Identifier": "ITR54839",
     "Airline": "Turkish Airlines",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -186,7 +186,7 @@
   {
     "Maker": "Airbus",
     "Model": "A330",
-    "Identifier": "LKA53521",
+    "Identifier": "LKA69430",
     "Airline": "Ryanair",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -194,7 +194,7 @@
   {
     "Maker": "Airbus",
     "Model": "A340",
-    "Identifier": "UCS63531",
+    "Identifier": "UCS76653",
     "Airline": "Wizzair",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -202,7 +202,7 @@
   {
     "Maker": "Boeing",
     "Model": "737",
-    "Identifier": "LLA13462",
+    "Identifier": "LLA55538",
     "Airline": "Condor",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -210,7 +210,7 @@
   {
     "Maker": "Boeing",
     "Model": "747",
-    "Identifier": "AFG65421",
+    "Identifier": "AFG76584",
     "Airline": "Delta",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -218,7 +218,7 @@
   {
     "Maker": "Boeing",
     "Model": "767",
-    "Identifier": "AAC12321",
+    "Identifier": "AAC09932",
     "Airline": "Emirates",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -226,7 +226,7 @@
   {
     "Maker": "Boeing",
     "Model": "777",
-    "Identifier": "BCA42313",
+    "Identifier": "BCA00432",
     "Airline": "KLM",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -234,7 +234,7 @@
   {
     "Maker": "Boeing",
     "Model": "787",
-    "Identifier": "ZZZ44411",
+    "Identifier": "ZZZ12332",
     "Airline": "AirAsia",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -242,7 +242,7 @@
   {
     "Maker": "Airbus",
     "Model": "A380",
-    "Identifier": "ABC12345",
+    "Identifier": "ABC11111",
     "Airline": "Lufthansa",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -250,7 +250,7 @@
   {
     "Maker": "Airbus",
     "Model": "A321",
-    "Identifier": "OLD45314",
+    "Identifier": "OLD22222",
     "Airline": "Lot",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -258,7 +258,7 @@
   {
     "Maker": "Airbus",
     "Model": "A320",
-    "Identifier": "ITR65634",
+    "Identifier": "ITR65467",
     "Airline": "Turkish Airlines",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -266,7 +266,7 @@
   {
     "Maker": "Airbus",
     "Model": "A330",
-    "Identifier": "LKA53521",
+    "Identifier": "LKA88865",
     "Airline": "Ryanair",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -274,7 +274,7 @@
   {
     "Maker": "Airbus",
     "Model": "A340",
-    "Identifier": "UCS63531",
+    "Identifier": "UCS65688",
     "Airline": "Wizzair",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -282,7 +282,7 @@
   {
     "Maker": "Boeing",
     "Model": "737",
-    "Identifier": "LLA13462",
+    "Identifier": "LLA99065",
     "Airline": "Condor",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -290,7 +290,7 @@
   {
     "Maker": "Boeing",
     "Model": "747",
-    "Identifier": "AFG65421",
+    "Identifier": "AFG01223",
     "Airline": "Delta",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -298,7 +298,7 @@
   {
     "Maker": "Boeing",
     "Model": "767",
-    "Identifier": "AAC12321",
+    "Identifier": "AAC43452",
     "Airline": "Emirates",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -306,7 +306,7 @@
   {
     "Maker": "Boeing",
     "Model": "777",
-    "Identifier": "BCA42313",
+    "Identifier": "BCA88632",
     "Airline": "KLM",
     "LocationId": 1,
     "NumberOfSeats": 70
@@ -314,7 +314,7 @@
   {
     "Maker": "Boeing",
     "Model": "787",
-    "Identifier": "ZZZ44411",
+    "Identifier": "ZZZ33498",
     "Airline": "AirAsia",
     "LocationId": 1,
     "NumberOfSeats": 70
